@@ -1,0 +1,6 @@
+*** Dat Changelog ***
+
+= 1.0.0 - 2023/04/10 =
+* First Release of the Dat Block Theme
+* Released via a3 Dashboard as a free Block Theme download
+
