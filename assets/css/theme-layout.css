@@ -150,7 +150,7 @@ img.aligncenter,.wp-block-post-content[class^="wp-container-"] > .aligncenter,.w
 .single[class*="single-"] .wp-block-post-author__name{text-align:left;}
 .wp-block-group:not(.wp-block-group-featured-image):empty{display:none}
 .wp-block-group-featured-image .post-featured-image_placeholder svg,.wp-block-group-featured-image .post-featured-image_placeholder p{display:none}
-.wp-block-group-featured-image:empty,.wp-block-group-featured-image .wp-block-post-featured-image__placeholder{width:100%;background-image:url(assets/images/no-image.jpg)!important;background-position:center center!important;background-repeat:no-repeat!important;margin:0;padding:56.25% 0 0;background-size:cover;border:1px solid #f2f2f2;}
+.wp-block-group-featured-image:empty,.wp-block-group-featured-image .wp-block-post-featured-image__placeholder{width:100%;background-position:center center!important;background-repeat:no-repeat!important;margin:0;padding:56.25% 0 0;background-size:cover;border:1px solid #f2f2f2;}
 .wp-block-image{margin:0;padding:0}
 .wp-block-post-author__bio,.wp-block-post-author__byline{font-size:inherit;margin:0}
 .wp-block-categories-list.wp-block-categories{padding-left:0;list-style:none}

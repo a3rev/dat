@@ -95,7 +95,11 @@ class WC_Theme
     }
 
     public static function _woocommerce_placeholder_img_src( $src ){
-        $src = get_template_directory_uri() .'/assets/images/no-image.jpg';
+        if( file_exists( get_stylesheet_directory() .'/assets/images/placeholder.jpg' ) ){
+            $src = get_stylesheet_directory_uri() .'/assets/images/placeholder.jpg';
+        }else{
+            $src = get_template_directory_uri() .'/assets/images/placeholder.jpg';
+        }
         return $src;
     }
 
@@ -112,7 +116,12 @@ class WC_Theme
 
         $attr = wp_parse_args( $attr, $default_attr );
 
-        $image      =  get_template_directory_uri() .'/assets/images/no-image.jpg';
+        if( file_exists( get_stylesheet_directory() .'/assets/images/placeholder.jpg' ) ){
+            $image = get_stylesheet_directory_uri() .'/assets/images/placeholder.jpg';
+        }else{
+            $image      =  get_template_directory_uri() .'/assets/images/placeholder.jpg';
+        }
+
         $hwstring   = image_hwstring( $dimensions['width'], $dimensions['height'] );
         $attributes = array();
 

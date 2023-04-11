@@ -62,6 +62,14 @@ class Theme_Hook
 
         $styles = $this->webfonts_local();
 
+        $placeholder      =  get_template_directory_uri() .'/assets/images/placeholder.jpg';
+
+        if( file_exists( get_stylesheet_directory() .'/assets/images/placeholder.jpg' ) ){
+            $placeholder = get_stylesheet_directory_uri() .'/assets/images/placeholder.jpg';
+        }
+
+        $styles .= '.wp-block-group-featured-image:empty,.wp-block-group-featured-image .wp-block-post-featured-image__placeholder {background-image: url('.$placeholder.') !important;}';
+
         wp_add_inline_style( 'theme-layout', $styles );
 
         wp_enqueue_style(
