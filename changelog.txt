@@ -1,5 +1,11 @@
 *** Dat Changelog ***
 
+= 1.0.1 - 2023/05/08 =
+* This release includes a CSS tweak for the Child Theme function and two fixes for Doorkeeper login bugs.
+* Tweak - Remove element CSS with !important to allow for child theme customization
+* Fix - Login popup conflict with Doorkeeper plugin
+* Fix - Login conflict with Doorkeeper plugin when maintenance option is ON.
+
 = 1.0.0 - 2023/04/10 =
 * First Release of the Dat Block Theme
 * Released via a3 Dashboard as a free Block Theme download

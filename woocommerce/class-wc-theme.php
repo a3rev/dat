@@ -35,6 +35,8 @@ class WC_Theme
         // Hide woocommerce_show_page_title.
         add_filter('woocommerce_show_page_title', array( __CLASS__, 'woocommerce_show_page_title' ));
 
+        add_filter('post_type_archive_title', array( __CLASS__, 'update_product_archive_title' ), 11, 2 );
+
         // This theme doesn't have a traditional sidebar.
         remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 
@@ -84,6 +86,18 @@ class WC_Theme
         add_filter( 'default_template_types', array( __CLASS__, 'default_template_types' ), 10 );
  
         
+    }
+
+    public static function update_product_archive_title( $post_type_name, $post_type ) {
+        if (
+            function_exists( 'is_shop' ) &&
+            is_shop() &&
+            'product' === $post_type
+        ) {
+            return get_the_title( wc_get_page_id('shop') );
+        }
+
+        return $post_type_name;
     }
 
     public static function woocommerce_before_single_product_summary_open(){

@@ -75,10 +75,10 @@ img.aligncenter,.wp-block-post-content[class^="wp-container-"] > .aligncenter,.w
 .is-column-r-l-borders{border-left:1px solid currentColor;border-right:1px solid currentColor;padding:var(--wp--custom--padding-top) var(--wp--custom--padding-right) var(--wp--custom--padding-bottom) var(--wp--custom--padding-left)}
 .wp-block-columns{margin-bottom:var(--wp--custom--responsive-space-vertical)}
 .is-no-margin-bottom,.is-no-margin-bottom .wp-block-columns,.site-header .wp-block-columns{margin-bottom:0}
-.is-sticky-header{position:sticky;top:0;z-index:99}
-.admin-bar .is-sticky-header{position:sticky;top:32px}
-.has-modal-open .is-sticky-header{z-index:99999}
-.is-sticky-header.site-header{z-index:100}
+.is-style-sticky-header{position:sticky;top:0;z-index:99}
+.admin-bar .is-style-sticky-header{position:sticky;top:32px}
+.has-modal-open .is-style-sticky-header{z-index:99999}
+.is-style-sticky-header.site-header{z-index:100}
 .wp-block-navigation__responsive-container.is-menu-open{padding:20px}
 .wp-site-blocks .has-background > button.wp-block-navigation__responsive-container-open{margin-top:10px;margin-bottom:10px}
 .custom-space .wp-block-navigation__responsive-container{margin-left:-15px;margin-right:-15px}
@@ -199,7 +199,7 @@ aside.sidebar-left > ul,aside.sidebar-right > ul{margin-top:0px}
 @media (min-width:601px) and (max-width:782px){
 
   /* Layout */
-  .admin-bar .is-sticky-header{top:46px}
+  .admin-bar .is-style-sticky-header{top:46px}
   .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column:not(:only-child){   /*flex-basis: calc(50% - (var(--wp--custom--responsive-space-horizontal)) / 2) !important*/
   flex-basis:33%!important}
   .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.is-no-margin:not(:only-child),.wp-block-columns.alignfull:not(.is-not-stacked-on-mobile)>.wp-block-column:not(:only-child){   /*flex-basis: 50% !important*/}
@@ -212,7 +212,7 @@ aside.sidebar-left > ul,aside.sidebar-right > ul{margin-top:0px}
 
   /* Layout */
   body{--wp--preset--font-size--extra-large:2rem}
-  .is-sticky-header{position:initial!important}
+  .is-style-sticky-header{position:initial!important}
   .wp-block-column.responsive-copyright{text-align:center;padding-bottom:0!important}
   .wp-block-column.responsive-poweredby{text-align:center;padding-top:0!important}
 
