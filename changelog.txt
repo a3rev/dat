@@ -1,5 +1,14 @@
 *** Dat Changelog ***
 
+= 1.1.0 - 2023/05/22 =
+* This release adds padding tweaks in theme.json for desktop, tablet and mobile.
+* Tweak - Add custom padding for input for desktop in theme.json
+* Tweak - Add custom padding for input for tablet in theme.json
+* Tweak - Add custom padding for input for mobile in theme.json
+* Tweak - Add custom padding for button for desktop in theme.json
+* Tweak - Add custom padding for button for tablet in theme.json
+* Tweak - Add custom padding for button for mobile in theme.json
+
 = 1.0.1 - 2023/05/08 =
 * This release includes a CSS tweak for the Child Theme function and two fixes for Doorkeeper login bugs.
 * Tweak - Remove element CSS with !important to allow for child theme customization

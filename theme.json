@@ -252,20 +252,60 @@
 			"buttonPaddingBottom":"10px",
 			"buttonPaddingLeft":"20px",
 
+			"buttonTabletPaddingTop":"10px",
+			"buttonTabletPaddingRight":"15px",
+			"buttonTabletPaddingBottom":"10px",
+			"buttonTabletPaddingLeft":"15px",
+
+			"buttonMobilePaddingTop":"10px",
+			"buttonMobilePaddingRight":"10px",
+			"buttonMobilePaddingBottom":"10px",
+			"buttonMobilePaddingLeft":"10px",
+
 			"buttonMarginTop":"20px",
 			"buttonMarginRight":"20px",
 			"buttonMarginBottom":"20px",
 			"buttonMarginLeft":"20px",
+
+			"buttonTabletMarginTop":"20px",
+			"buttonTabletMarginRight":"20px",
+			"buttonTabletMarginBottom":"20px",
+			"buttonTabletMarginLeft":"20px",
+
+			"buttonMobileMarginTop":"20px",
+			"buttonMobileMarginRight":"20px",
+			"buttonMobileMarginBottom":"20px",
+			"buttonMobileMarginLeft":"20px",
 
 			"inputPaddingTop":"10px",
 			"inputPaddingRight":"10px",
 			"inputPaddingBottom":"10px",
 			"inputPaddingLeft":"10px",
 
+			"inputTabletPaddingTop":"10px",
+			"inputTabletPaddingRight":"10px",
+			"inputTabletPaddingBottom":"10px",
+			"inputTabletPaddingLeft":"10px",
+
+			"inputMobilePaddingTop":"10px",
+			"inputMobilePaddingRight":"10px",
+			"inputMobilePaddingBottom":"10px",
+			"inputMobilePaddingLeft":"10px",
+
 			"inputMarginTop":"0px",
 			"inputMarginRight":"0px",
 			"inputMarginBottom":"0px",
 			"inputMarginLeft":"0px",
+
+			"inputTabletMarginTop":"0px",
+			"inputTabletMarginRight":"0px",
+			"inputTabletMarginBottom":"0px",
+			"inputTabletMarginLeft":"0px",
+
+			"inputMobileMarginTop":"0px",
+			"inputMobileMarginRight":"0px",
+			"inputMobileMarginBottom":"0px",
+			"inputMobileMarginLeft":"0px",
 
 			"lineHeight":"1.7",
 			"fontWeight":"300"

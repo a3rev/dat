@@ -84,7 +84,7 @@ class Theme_Support
         // This variable is intended to be overruled from themes.
         // Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-        $GLOBALS['content_width'] = apply_filters('_theme_content_width', 720);
+        $GLOBALS['content_width'] = apply_filters('_theme_content_width', 1024);
     }
 }
 
