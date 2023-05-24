@@ -72,3 +72,15 @@ if( $pos === false ){
         }
     }
 }
+
+//https://core.trac.wordpress.org/ticket/58366
+/*
+add_filter('register_block_type_args', function ($settings, $name) {
+    if ($name === 'core/shortcode') {
+        $settings['render_callback'] = function ($attributes, $content) {
+                return $content;
+        };
+    }
+    return $settings;
+}, 10, 2);
+*/

@@ -1,4 +1,8 @@
-*** Dat Changelog ***
+*** Dat Theme Changelog ***
+
+= 1.1.1 - 2023/05/24 =
+* This release has a style tweak for the Header Template
+* Tweak - Style for Header Template, apply group block position sticky
 
 = 1.1.0 - 2023/05/22 =
 * This release adds padding tweaks in theme.json for desktop, tablet and mobile.
