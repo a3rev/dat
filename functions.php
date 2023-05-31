@@ -28,6 +28,7 @@ require_once 'inc/block-styles.php';
 // Woocommerce hook.
 if (class_exists('WooCommerce')) {
     require_once 'woocommerce/class-wc-theme.php';
+    require_once 'inc/single-product-block-patterns.php';
 }
 
 // Maintenance

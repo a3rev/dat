@@ -1,5 +1,13 @@
 *** Dat Theme Changelog ***
 
+= 1.2.0 - 2023/05/31 =
+* This major feature release adds full support for WooCommerce Single Product Block Template plus a new Pattern for the block Template.
+* Feature - Add full support for WooCommerce Single Product Block Template
+* Feature - Upon install, Theme will use the new WC Single Product Template by default. 
+* Feature - Add option to DAT Settings, to use legacy WooCommerce Single Product Template instead of the Block template.
+* Feature - Add DAT WooCommerce Single Product 1 Pattern
+* Dev - Add code tweak to show SKU Block, Categories, Tag Block on Single Product Pattern. Bug in the WC template. Will remove once it is fixed. 
+
 = 1.1.1 - 2023/05/24 =
 * This release has a style tweak for the Header Template
 * Tweak - Style for Header Template, apply group block position sticky

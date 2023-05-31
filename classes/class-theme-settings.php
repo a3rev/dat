@@ -3,8 +3,14 @@
 class Theme_Settings{
 
     protected $default = array(
-        'site_maintenance'  => false,
-        'login_form_css'    => 'body.login{
+        'site_maintenance'              => false,
+        'login_form_logo'               => '/wp-content/themes/dat/assets/images/logo-login.png',
+        'login_modal'                   => false,
+        'signup_text'                   => 'Sign Up',
+        'signup_url'                    => '',
+        'single_product_legacy'         => false,
+        'single_product_title'          => false,
+        'login_form_css'                => 'body.login{
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -83,12 +89,7 @@ input#wp-submit {
 #nav,
 #backtoblog {
     text-align: center
-}',
-        'login_form_logo'   => '/wp-content/themes/dat/assets/images/logo-login.png',
-        'login_modal'       => false,
-        'signup_text'       => 'Sign Up',
-        'signup_url'        => '',
-        'single_product_title'       => false,
+}'
         
     );
 
@@ -234,12 +235,23 @@ input#wp-submit {
                         if( class_exists('WooCommerce') ){
                         ?>
                         <tr>
+                            <th scope="row"><label for="single_product_legacy"><?php _e( 'Single Product Template' ); ?></label></th>
+                            <td>
+                                <fieldset>
+                                    <label for="single_product_legacy">
+                                        <input name="single_product_legacy" type="checkbox" id="single_product_legacy" value="true" <?php  echo ( isset( $settings['single_product_legacy'] ) && $settings['single_product_legacy'] == true ? ' checked="checked"' : '' )?>>
+                                        <?php _e( 'Check to replace the WooCommerce Single Product Block Template with the legacy Template.' ); ?>
+                                    </label>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
                             <th scope="row"><label for="single_product_title"><?php _e( 'Show Product Title' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="single_product_title">
                                         <input name="single_product_title" type="checkbox" id="single_product_title" value="true" <?php  echo ( isset( $settings['single_product_title'] ) && $settings['single_product_title'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Checked to show single product title on summary.' ); ?>
+                                        <?php _e( 'Checked to show single product title on summary with legacy single template' ); ?>
                                     </label>
                                 </fieldset>
                             </td>

@@ -47,16 +47,21 @@ class WC_Theme
         remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
         remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
 
+        $single_product_legacy = is_array($theme_options) && isset($theme_options['single_product_legacy']) ? (boolean)$theme_options['single_product_legacy'] : false;
 
-        // Add open tag for "woocommerce-product-summary" woocommerce_before_single_product_summary
-        add_action('woocommerce_before_single_product_summary', array( __CLASS__, 'woocommerce_before_single_product_summary_open' ));
-       
-        // Add close tag for "woocommerce-product-summary" woocommerce_after_single_product_summary
-        add_action('woocommerce_after_single_product_summary', array( __CLASS__, 'woocommerce_after_single_product_summary_close' ), 0);
+        if( $single_product_legacy === true ){
+            // Add open tag for "woocommerce-product-summary" woocommerce_before_single_product_summary
+            add_action('woocommerce_before_single_product_summary', array( __CLASS__, 'woocommerce_before_single_product_summary_open' ));
+           
+            // Add close tag for "woocommerce-product-summary" woocommerce_after_single_product_summary
+            add_action('woocommerce_after_single_product_summary', array( __CLASS__, 'woocommerce_after_single_product_summary_close' ), 0);
 
-        // Change position On Salse Single product page
-        remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
-        add_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_sale_flash', 0 );
+            // Change position On Salse Single product page
+            remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+            add_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_sale_flash', 0 );
+        }
+
+        
 
         $single_product_title = is_array($theme_options) && isset($theme_options['single_product_title']) ? (boolean)$theme_options['single_product_title'] : false;
 
@@ -101,7 +106,7 @@ class WC_Theme
     }
 
     public static function woocommerce_before_single_product_summary_open(){
-        echo '<div class="woocommerce-product-summary">';
+        echo '<div class="custom-product-summary">';
     }
 
     public static function woocommerce_after_single_product_summary_close(){
