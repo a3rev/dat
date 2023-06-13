@@ -104,7 +104,7 @@ img.aligncenter,.wp-block-post-content[class^="wp-container-"] > .aligncenter,.w
 .wp-block-quote,blockquote{border-left:0.25em solid currentColor;margin:0 0 20px 0;padding-left:20px;}
 .form-submit.wp-block-button{margin-bottom:0;}
 .site-header .wp-block-search .wp-block-search__input{border:1px solid #fff}
-.wp-block-search .wp-block-search__button{border:1px solid #949494;border-radius:4px}
+.wp-block-search .wp-block-search__button{border:1px solid black;border-radius:4px}
 .wp-block-search .wp-block-search__input,input[type=search]{border-radius:4px}
 .has-border{line-height:normal;border-bottom:1px solid;padding-bottom:5px}
 .has-border>span{position:relative}

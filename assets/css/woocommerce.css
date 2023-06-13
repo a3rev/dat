@@ -640,10 +640,6 @@
 	text-align: right
 }
 
-div[data-block-name*="woocommerce"] {
-	margin-block-start: 0;
-}
-
 div[data-block-name*="woocommerce"] .woocommerce-error, div[data-block-name*="woocommerce"] .woocommerce-info, div[data-block-name*="woocommerce"] .woocommerce-message {
 	padding-left: calc(var(--wp--custom--responsive-space-horizontal) + 30px) !important;
 	padding-right: calc(var(--wp--custom--responsive-space-horizontal) + 0px) !important

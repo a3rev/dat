@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.3.0 - 2023/06/13 =
+* This feature release adds 2 new Patterns for the 404 page plus compatibility with the WooCommerce Single Product Block Template.
+* Feature - Add 404 page Pattern
+* Feature - Add WooCommerce site 404 page Pattern 
+* Tweak - Check for compatibility with the WooCommerce Single Product Block Template
+
 = 1.2.0 - 2023/05/31 =
 * This major feature release adds full support for WooCommerce Single Product Block Template plus a new Pattern for the block Template.
 * Feature - Add full support for WooCommerce Single Product Block Template

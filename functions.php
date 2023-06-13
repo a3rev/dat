@@ -24,11 +24,12 @@ require_once 'classes/class-theme-hook.php';
 
 // Block styles.
 require_once 'inc/block-styles.php';
+require_once 'inc/patterns.php';
 
 // Woocommerce hook.
 if (class_exists('WooCommerce')) {
     require_once 'woocommerce/class-wc-theme.php';
-    require_once 'inc/single-product-block-patterns.php';
+    require_once 'inc/wc-patterns.php';
 }
 
 // Maintenance
