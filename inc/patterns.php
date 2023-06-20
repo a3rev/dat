@@ -3,7 +3,7 @@
  * Block patterns
  *
  * @package BlockPress
- * @since 1.3.0
+ * @since 1.3.1
  */
 
 /**

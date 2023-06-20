@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 7.4.0
+ * @version 7.8.0
  *
  * @var bool   $readonly If the input should be set to readonly mode.
  * @var string $type     The input type attribute.
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 'woocommerce' ), wp_strip_all_tags( $args['product_name'] ) ) : esc_html__( 'Quantity', 'woocommerce' );
 
 ?>
-
+<div class="quantity">
 	<?php
 	/**
 	 * Hook to output something before the quantity input field.
@@ -37,7 +37,7 @@ $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 
 	<?php
 	if( $type !== 'hidden'){
 	?>
-	<div class="quantity buttons_added">
+	<div class="buttons_added">
 	<button type="button" class="minus button wp-element-button">-</button>
 	<?php
 	}
@@ -49,7 +49,7 @@ $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 
 		class="<?php echo esc_attr( join( ' ', (array) $classes ) ); ?>"
 		name="<?php echo esc_attr( $input_name ); ?>"
 		value="<?php echo esc_attr( $input_value ); ?>"
-		title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'woocommerce' ); ?>"
+		aria-label="<?php esc_attr_e( 'Product quantity', 'woocommerce' ); ?>"
 		size="4"
 		min="<?php echo esc_attr( $min_value ); ?>"
 		max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>"
@@ -76,5 +76,5 @@ $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 
 	 */
 	do_action( 'woocommerce_after_quantity_input_field' );
 	?>
-
+</div>
 <?php

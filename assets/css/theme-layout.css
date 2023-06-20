@@ -211,7 +211,7 @@ aside.sidebar-left > ul,aside.sidebar-right > ul{margin-top:0px}
 	input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),textarea,select,fieldset{padding:var(--wp--custom--input-tablet-padding-top) var(--wp--custom--input-tablet-padding-right) var(--wp--custom--input-tablet-padding-bottom) var(--wp--custom--input-tablet-padding-left);}
 	select{padding-right:calc(var(--wp--custom--input-tablet-padding-right) + 40px);}
 	.select2-container .select2-selection--single{padding:var(--wp--custom--input-tablet-padding-top) var(--wp--custom--input-tablet-padding-right) var(--wp--custom--input-tablet-padding-bottom) var(--wp--custom--input-tablet-padding-left);}
-	.wp-block-button .wp-block-button__link,.wp-element-button,.wp-block-button__link,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link{padding:var(--wp--custom--button-tablet-padding-top) var(--wp--custom--button-tablet-padding-right) var(--wp--custom--button-tablet-padding-bottom) var(--wp--custom--button-tablet-padding-left);}
+	.wp-block-button .wp-block-button__link,.wp-element-button,.button.wp-element-button,.wp-block-button__link,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link{padding:var(--wp--custom--button-tablet-padding-top) var(--wp--custom--button-tablet-padding-right) var(--wp--custom--button-tablet-padding-bottom) var(--wp--custom--button-tablet-padding-left);}
 
 /* Style */}
 @media screen and (max-width:600px){
@@ -383,7 +383,7 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 	input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),textarea,select,fieldset{padding:var(--wp--custom--input-mobile-padding-top) var(--wp--custom--input-mobile-padding-right) var(--wp--custom--input-mobile-padding-bottom) var(--wp--custom--input-mobile-padding-left);}
 	select{padding-right:calc(var(--wp--custom--input-mobile-padding-right) + 40px);}
 	.select2-container .select2-selection--single{padding:var(--wp--custom--input-mobile-padding-top) var(--wp--custom--input-mobile-padding-right) var(--wp--custom--input-mobile-padding-bottom) var(--wp--custom--input-mobile-padding-left);}
-	.wp-block-button .wp-block-button__link,.wp-element-button,.wp-block-button__link,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link{padding:var(--wp--custom--button-mobile-padding-top) var(--wp--custom--button-mobile-padding-right) var(--wp--custom--button-mobile-padding-bottom) var(--wp--custom--button-mobile-padding-left);}
+	.wp-block-button .wp-block-button__link,.wp-element-button,.button.wp-element-button,.wp-block-button__link,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link{padding:var(--wp--custom--button-mobile-padding-top) var(--wp--custom--button-mobile-padding-right) var(--wp--custom--button-mobile-padding-bottom) var(--wp--custom--button-mobile-padding-left);}
 }
 @media (max-width:560px){
 	.site-header-1 .wp-block-site-logo.is-default-size img.default-logo{max-width:160px;}

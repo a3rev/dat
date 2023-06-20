@@ -1,5 +1,12 @@
 *** Dat Theme Changelog ***
 
+= 1.3.1 - 2023/06/20 =
+* This release has tweaks and fixes for compatibility with WooCommerce 7.8.0
+* Tweak - Template compatibility with the WooCommerce 7.8.0
+* Tweak - Style compatibility with the WooCommerce Single Product Block Template.
+* Fix - Add custom padding input, button for tablet. Was not showing on some devices
+* Fix - Add custom padding input, button for mobile. Was not showing work on some devices
+
 = 1.3.0 - 2023/06/13 =
 * This feature release adds 2 new Patterns for the 404 page plus compatibility with the WooCommerce Single Product Block Template.
 * Feature - Add 404 page Pattern
