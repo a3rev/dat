@@ -99,4 +99,22 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// When the user clicks on the button, scroll to the top of the document
+function datTopFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+window.addEventListener('load', function() {
 
+    let datScrollTopButton = document.getElementById("scrollTopButton");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {datScrollFunction()};
+
+    function datScrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            datScrollTopButton.style.display = "flex";
+        } else {
+            datScrollTopButton.style.display = "none";
+        }
+    }
+});

@@ -1,5 +1,8 @@
 *** Dat Theme Changelog ***
 
+= 1.3.2 - 2023/06/23 =
+* Feature - Added button click Scroll to Top.
+
 = 1.3.1 - 2023/06/20 =
 * This release has tweaks and fixes for compatibility with WooCommerce 7.8.0
 * Tweak - Template compatibility with the WooCommerce 7.8.0

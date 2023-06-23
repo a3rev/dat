@@ -4,6 +4,7 @@ class Theme_Settings{
 
     protected $default = array(
         'site_maintenance'              => false,
+        'scroll_top'                    => false,
         'login_form_logo'               => '/wp-content/themes/dat/assets/images/logo-login.png',
         'login_modal'                   => false,
         'signup_text'                   => 'Sign Up',
@@ -183,6 +184,19 @@ input#wp-submit {
                                         <?php _e( 'Checked maintenance site' ); ?>
                                     </label>
                                     <p class="description"><?php _e( 'Create a page with slug is "maintenance"' ); ?></p>
+                                </fieldset>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><label for="scroll_top"><?php _e( 'Scroll Top Button' ); ?></label></th>
+                            <td>
+                                <fieldset>
+            
+                                    <label for="scroll_top">
+                                        <input name="scroll_top" type="checkbox" id="scroll_top" value="true" <?php  echo ( isset( $settings['scroll_top'] ) && $settings['scroll_top'] == true ? ' checked="checked"' : '' )?>>
+                                        <?php _e( 'Disable scroll top button.' ); ?>
+                                    </label>
                                 </fieldset>
                             </td>
                         </tr>

@@ -20,6 +20,7 @@ class Theme_Hook
 
         // Popup login
         add_action('wp_footer', [ $this, '_theme_popup_login' ]);
+        add_action('wp_footer', [ $this, '_theme_scroll_top_button' ]);
 
         // Tweak custom login
         add_action('login_footer', [ $this, '_theme_tweak_custom_login' ], 99);
@@ -30,6 +31,22 @@ class Theme_Hook
 
         add_action('wp_enqueue_scripts', [ $this, '_theme_enqueue_styles' ], 0);
 
+    }
+
+    public function _theme_scroll_top_button(){
+
+        global $theme_options;
+
+        $scroll_top = is_array($theme_options) && isset($theme_options['scroll_top']) ? $theme_options['scroll_top'] : false;
+
+        if( $scroll_top === true || $scroll_top === 'true' ){
+            return;
+        }
+
+        $icon = apply_filters( 'scroll_top_button_svg', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="arrowchevrontop" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 263.55c4.3 4.28 11.3 4.3 15.62.05 4.33-4.26 4.35-11.19.05-15.47L263.83 3.22c-4.3-4.27-11.3-4.3-15.63-.04L3.21 248.13c-4.3 4.28-4.28 11.21.05 15.47 4.32 4.25 11.32 4.23 15.62-.05L255.99 26.48l237.13 237.07z"/></svg>' );
+        ?>
+        <button onclick="datTopFunction()" id="scrollTopButton" title="<?php _e( 'Go to top' ); ?>" class="srcoll-to-top"><?php echo $icon; ?></button>
+        <?php
     }
 
     public function webfonts_local(){

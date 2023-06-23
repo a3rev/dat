@@ -1,3 +1,4 @@
+html{scroll-behavior:smooth;}
 body{overflow-x:hidden}
 *{box-sizing:border-box}
 *,*:before,*:after{box-sizing:border-box}
@@ -422,3 +423,8 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 @media (max-width:600px){
 	.wp-block-post-template.is-flex-container>li,.wp-block-query-loop.is-flex-container>li,.wp-block-query .wp-block-post-template.is-flex-container>li{width:calc((100% - var(--wp--custom--gutter-horizontal)) / 2)!important;}
 }
+
+/* Scroll Top Button */
+#scrollTopButton{display:none;position:fixed;bottom:20px;right:20px;z-index:99;border:none;outline:none;background-color:#333;color:white;cursor:pointer;padding:10px;border-radius:4px;justify-content:center;align-items:center;}
+#scrollTopButton svg{fill:white;}
+#scrollTopButton:hover{background-color:#666;}
