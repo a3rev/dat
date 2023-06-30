@@ -111,10 +111,12 @@ window.addEventListener('load', function() {
     window.onscroll = function() {datScrollFunction()};
 
     function datScrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            datScrollTopButton.style.display = "flex";
-        } else {
-            datScrollTopButton.style.display = "none";
+        if( typeof datScrollTopButton !== 'undefined' && datScrollTopButton !== null ){
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                datScrollTopButton.style.display = "flex";
+            } else {
+                datScrollTopButton.style.display = "none";
+            }
         }
     }
 });

@@ -1,5 +1,9 @@
 *** Dat Theme Changelog ***
 
+= 1.3.3 - 2023/06/30 =
+* This maintenance release has a bug fix for the scroll to top of page.
+* Fix - Issue with script when scroll to top button is disable
+
 = 1.3.2 - 2023/06/23 =
 * Feature - Added button click Scroll to Top.
 
