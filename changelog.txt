@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.3.4 - 2023/07/03 =
+* This maintenance release has tweaks for compatibility with WooCommerce 7.8.1 and WordPress 6.3 Beta 2
+* Tweak - Check style compatibility with the WordPress 6.3 Beta 2
+* Tweak - WooCommerce style for compatibility with the WooCommerce 7.8.1
+* Tweak - Remove hardcode style for blocks columns on Single Product to allow sort by column
+
 = 1.3.3 - 2023/06/30 =
 * This maintenance release has a bug fix for the scroll to top of page.
 * Fix - Issue with script when scroll to top button is disable
