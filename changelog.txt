@@ -1,5 +1,12 @@
 *** Dat Theme Changelog ***
 
+= 1.3.5 - 2023/07/15 =
+* This maintenance release adds WooCommerce Quantity Selector styles to theme.json plus to JavaScript performance tweaks.  
+* Dev - Add Style for WooCommerce quantity selector can config on theme.json
+* Dev - Add Border colour & colour for WooCommerce quantity selector config in theme.json for easy change border colour to same as the button style
+* Performance - JavaScript load after window loaded
+* Performance - JavaScript scroll to top load after window loaded
+
 = 1.3.4 - 2023/07/03 =
 * This maintenance release has tweaks for compatibility with WooCommerce 7.8.1 and WordPress 6.3 Beta 2
 * Tweak - Check style compatibility with the WordPress 6.3 Beta 2

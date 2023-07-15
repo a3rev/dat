@@ -529,6 +529,7 @@ class Theme_Hook
                 document.addEventListener('DOMContentLoaded', function() {
                     var loginTitleLink = document.querySelector('#login h1 a');
                     loginTitleLink.innerHTML = '<img src="<?php echo $login_form_logo;?>" />';
+                    loginTitleLink.href="<?php echo get_site_url(); ?>"; 
                 });
             </script>
             <?php

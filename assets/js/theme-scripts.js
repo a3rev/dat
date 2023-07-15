@@ -108,7 +108,10 @@ window.addEventListener('load', function() {
 
     let datScrollTopButton = document.getElementById("scrollTopButton");
     // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {datScrollFunction()};
+    window.onscroll = function() {
+        
+        datScrollFunction();
+    };
 
     function datScrollFunction() {
         if( typeof datScrollTopButton !== 'undefined' && datScrollTopButton !== null ){
@@ -116,6 +119,12 @@ window.addEventListener('load', function() {
                 datScrollTopButton.style.display = "flex";
             } else {
                 datScrollTopButton.style.display = "none";
+            }
+
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.body.classList.add("sticky-header");
+            } else {
+                document.body.classList.remove("sticky-header");
             }
         }
     }
