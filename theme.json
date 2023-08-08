@@ -277,6 +277,7 @@
 			"buttonMobileMarginBottom":"20px",
 			"buttonMobileMarginLeft":"20px",
 
+			"inputBackgroundColor":"var(--wp--preset--color--white)",
 			"inputColor":"var(--wp--preset--color--dark-black)",
 			"inputFontSize":"var(--wp--preset--font-size--small)",
 			"inputFontWeight":300,
@@ -658,15 +659,15 @@
 	},
 	"templateParts": [
 		{
-			"name": "header",
+			"name": "Header",
 			"area": "header"
 		},
 		{
-			"name": "footer",
+			"name": "Footer",
 			"area": "footer"
 		},
 		{
-			"name": "navigation",
+			"name": "Navigation",
 			"area": "uncategorized"
 		},
 		{
