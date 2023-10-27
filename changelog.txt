@@ -1,5 +1,15 @@
 *** Dat Theme Changelog ***
 
+= 1.5.1 - 2023/10/27 =
+* This maintenance release has 4 code tweaks and 1 bug fix for compatibility with WordPress 6.4 and WooCommerce 8.2
+* Tweak - Tested for compatibility with WooCommerce 8.2.0
+* Tweak - Tested for compatibility with WordPress 6.4.0
+* Tweak - z-index for header style
+* Tweak - Style compatibility with WooCommerce
+* Tweak - Add style for WooCommerce success message when add to cart product on single product page.
+* Tweak - Ads style button for View Cart link WooCommerce success message when add to cart product on single product page
+* Fix - Style for Single product content layout
+
 = 1.5.0 - 2023/08/22 =
 * This feature release adds full support for WooCommerce Cart and Checkout Pages block templates.
 * Feature - Add checkout template with blocks for compatibility with WooCommerce 8.0.2
