@@ -1,5 +1,16 @@
 *** Dat Theme Changelog ***
 
+= 1.6.0 - 2023/11/01 =
+* This release adds 2 new features, 4 Code Tweaks and 2 bug fixes for compatibility with WordPress 6.4 and WooCommerce 8.2
+* Feature - Add option for set number of grid columns on Mobile for blog cards. 
+* Feature - Add option for set number of grid columns on Mobile for product cards. 
+* Tweak - Style for Mobile navigation icon background transparent. 
+* Tweak - Style for Mobile navigation button background transparent. 
+* Tweak - Style WooCommerce Checkout shortcode compatibility with WooCommerce 8.2.0
+* Tweak - Style WooCommerce Checkout block compatibility with WooCommerce 8.2.0
+* Fix - Price label before product price not showing when product card did not have price 
+* Fix - Price label before product price not showing when a single product did not have price 
+
 = 1.5.1 - 2023/10/27 =
 * This maintenance release has 4 code tweaks and 1 bug fix for compatibility with WordPress 6.4 and WooCommerce 8.2
 * Tweak - Tested for compatibility with WooCommerce 8.2.0
@@ -7,7 +18,7 @@
 * Tweak - z-index for header style
 * Tweak - Style compatibility with WooCommerce
 * Tweak - Add style for WooCommerce success message when add to cart product on single product page.
-* Tweak - Ads style button for View Cart link WooCommerce success message when add to cart product on single product page
+* Tweak - Add style button for View Cart link WooCommerce success message when add to cart product on single product page
 * Fix - Style for Single product content layout
 
 = 1.5.0 - 2023/08/22 =

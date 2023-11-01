@@ -68,6 +68,8 @@ class Theme_Hook
     public function _theme_enqueue_styles()
     {
 
+        global $theme_options;
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
         wp_enqueue_style(
@@ -86,6 +88,29 @@ class Theme_Hook
         }
 
         $styles .= '.wp-block-group-featured-image:empty,.wp-block-group-featured-image .wp-block-post-featured-image__placeholder {background-image: url('.$placeholder.') !important;}';
+
+        $grid_card_mobile           = is_array($theme_options) && isset($theme_options['grid_card_mobile']) ? $theme_options['grid_card_mobile'] : 2;
+        $grid_product_card_mobile   = is_array($theme_options) && isset($theme_options['grid_product_card_mobile']) ? $theme_options['grid_product_card_mobile'] : 2;
+
+        if( 1 == $grid_card_mobile ){
+            $styles .= '@media (max-width: 600px){
+                .wp-block-post-template.is-flex-container>li, 
+                .wp-block-query-loop.is-flex-container>li, 
+                .wp-block-query .wp-block-post-template.is-flex-container>li {
+                    width: 100% !important;
+                }
+            }';
+        }
+
+        if( 1 == $grid_product_card_mobile ){
+            $styles .= '@media (max-width: 600px){
+                body.woocommerce * ul.products[class*=columns-] li.product, 
+                body.woocommerce-page * ul.products[class*=columns-] li.product,
+                body.woocommerce * .wc-block-grid .wc-block-grid__products li.wc-block-grid__product {
+                    width: 100% !important;
+                }
+            }';
+        }
 
         wp_add_inline_style( 'theme-layout', $styles );
 

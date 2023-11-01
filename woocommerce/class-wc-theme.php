@@ -61,8 +61,6 @@ class WC_Theme
             add_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_sale_flash', 0 );
         }
 
-        
-
         $single_product_title = is_array($theme_options) && isset($theme_options['single_product_title']) ? (boolean)$theme_options['single_product_title'] : false;
 
         if( $single_product_title === false ){
@@ -89,9 +87,25 @@ class WC_Theme
         add_editor_style( $editorStyle );
 
         add_filter( 'default_template_types', array( __CLASS__, 'default_template_types' ), 10 );
+
+        add_filter( 'render_block', array( __CLASS__, 'wc_block_product_price' ), 10, 2 );
  
         
     }
+
+    public static function wc_block_product_price( $block_content, $block ) {
+   
+        if ( $block && isset($block['blockName']) && $block['blockName'] === 'woocommerce/product-price' ) {
+            $block_content = str_replace("\r\n",'', $block_content);
+            $block_content = str_replace("\n",'', $block_content);
+            $block_content = str_replace("\r",'', $block_content);
+            $block_content = preg_replace('/[ ]{2,}|[\t]/', '', trim($block_content));
+        } 
+
+        return $block_content;
+    }
+
+    
 
     public static function update_product_archive_title( $post_type_name, $post_type ) {
         if (

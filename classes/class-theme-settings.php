@@ -11,6 +11,8 @@ class Theme_Settings{
         'signup_url'                    => '',
         'single_product_legacy'         => false,
         'single_product_title'          => false,
+        'grid_card_mobile'              => 2,
+        'grid_product_card_mobile'      => 2,
         'login_form_css'                => 'body.login{
     display: flex;
     align-items: center;
@@ -202,6 +204,21 @@ input#wp-submit {
                         </tr>
 
                         <tr>
+                            <th scope="row"><label for="grid_card_mobile"><?php _e( 'Grid Card Mobile' ); ?></label></th>
+                            <td>
+                                <fieldset>
+                                    <label for="grid_card_mobile">
+                                        <select name="grid_card_mobile" id="grid_card_mobile">
+                                            <option value="1" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php _e( '1 column' ); ?></option>
+                                            <option value="2" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php _e( '2 columns' ); ?></option>
+                                        </select>
+                                        <?php _e( 'Choose columns for grid card show on Mobile on devices.' ); ?>
+                                    </label>
+                                </fieldset>
+                            </td>
+                        </tr>
+
+                        <tr>
                             <th scope="row"><label for="login_form_logo"><?php _e( 'Login Logo' ); ?></label></th>
                             <td>
                                 <input name="login_form_logo" type="text" id="login_form_logo" value="<?php echo ( isset( $settings['login_form_logo'] ) ) ? esc_attr($settings['login_form_logo']) : '' ?>">
@@ -249,6 +266,20 @@ input#wp-submit {
                         if( class_exists('WooCommerce') ){
                         ?>
                         <tr>
+                            <th scope="row"><label for="grid_product_card_mobile"><?php _e( 'Grid Product Card Mobile' ); ?></label></th>
+                            <td>
+                                <fieldset>
+                                    <label for="grid_product_card_mobile">
+                                        <select name="grid_product_card_mobile" id="grid_product_card_mobile">
+                                            <option value="1" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php _e( '1 column' ); ?></option>
+                                            <option value="2" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php _e( '2 columns' ); ?></option>
+                                        </select>
+                                        <?php _e( 'Choose columns for grid product card show on Mobile on devices.' ); ?>
+                                    </label>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
                             <th scope="row"><label for="single_product_legacy"><?php _e( 'Single Product Template' ); ?></label></th>
                             <td>
                                 <fieldset>
@@ -270,6 +301,7 @@ input#wp-submit {
                                 </fieldset>
                             </td>
                         </tr>
+
                         <?php
                         }
                         ?>
