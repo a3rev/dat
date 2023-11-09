@@ -1,5 +1,10 @@
 *** Dat Theme Changelog ***
 
+= 1.6.1 - 2023/11/09 =
+* This maintenance release has 2 bug fixes for compatibility with WordPress 6.4
+* Fix - is-flex-container apply for wordpress 6.4 (in wordpress 6.4 replace to is-layout-grid class ).
+* Fix - Poppins fonts not applying on FSE in wordpress 6.4
+
 = 1.6.0 - 2023/11/01 =
 * This release adds 2 new features, 4 Code Tweaks and 2 bug fixes for compatibility with WordPress 6.4 and WooCommerce 8.2
 * Feature - Add option for set number of grid columns on Mobile for blog cards. 
