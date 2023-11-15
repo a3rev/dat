@@ -29,9 +29,6 @@ class Theme_Support
         add_theme_support('automatic-feed-links');
         add_theme_support('post-thumbnails');
 
-        add_theme_support('title-tag');
-        add_theme_support('post-thumbnails');
-
         /*
         * Switch default core markup to output valid HTML5.
         * The comments block uses the markup from the comments template.

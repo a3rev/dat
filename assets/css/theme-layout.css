@@ -138,6 +138,7 @@ img.aligncenter,.wp-block-post-content[class^="wp-container-"] > .aligncenter,.w
 .wp-block-post-template.is-flex-container li,.wp-block-query-loop.is-flex-container li,.wp-block-post-template.is-layout-grid li,.wp-block-query-loop.is-layout-grid li{margin:0;}
 .has-aligned-items .wp-block-post-template.is-flex-container li,.has-aligned-items .wp-block-query-loop.is-flex-container li,.has-aligned-items .wp-block-post-template.is-layout-grid li,.has-aligned-items .wp-block-query-loop.is-layout-grid li{flex:auto}
 .is-flex-container .wp-block-group.is-box-shadow-no-padding,.is-layout-grid  .wp-block-group.is-box-shadow-no-padding{overflow:hidden}
+.wp-block-post-excerpt__excerpt{font-size: inherit;}
 .wp-block-group .wp-block-post-featured-image{text-align:center;line-height:0}
 .wp-block-post-template .wp-block-post-title > a{font-size:inherit}
 .wp-block-post-author{align-items:center;margin-top:0px!important;flex-direction:column}

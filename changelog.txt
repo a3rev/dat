@@ -1,5 +1,10 @@
 *** Dat Theme Changelog ***
 
+= 1.7.0 - 2023/11/15 =
+* This release adds a new Pattern and has an SEO bug fix, please run this upgrade.
+* Feature - Add "Call to Action with Animated Image" to the themes patterns
+* Fix - Remove theme support title tags and use default WordPress core. Was causing a redundant title tag to be output in the page code.
+
 = 1.6.1 - 2023/11/09 =
 * This maintenance release has 2 bug fixes for compatibility with WordPress 6.4
 * Fix - is-flex-container apply for wordpress 6.4 (in wordpress 6.4 replace to is-layout-grid class ).
