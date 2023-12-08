@@ -126,7 +126,7 @@
 			"fontSizes": [
 				{
 					"fluid": {
-						"min": "0.875rem",
+						"min": "0.938rem",
 						"max": "1rem"
 					},
 					"size": "1rem",

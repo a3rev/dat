@@ -1,5 +1,9 @@
 *** Dat Theme Changelog ***
 
+= 1.7.1 - 2023/12/08 =
+* This release tweaks the Clamp mobile small font size from 14to 15px
+* Tweak - Update Small font size default from clamp [0.875rem - 1rem] to [0.938rem - 1rem] ~ [14px - 16px] to [15px - 16px]
+
 = 1.7.0 - 2023/11/15 =
 * This release adds a new Pattern and has an SEO bug fix, please run this upgrade.
 * Feature - Add "Call to Action with Animated Image" to the themes patterns

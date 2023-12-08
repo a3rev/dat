@@ -17,6 +17,7 @@ pre{white-space:pre-wrap}
 .wp-site-blocks .site-navigation .wp-block-navigation .is-menu-open .wp-block-page-list{display:block}
 .wp-site-blocks .site-header .wp-block-navigation__responsive-container-open{font-size:var(--wp--preset--font-size--normal)}
 .has-modal-open .wp-block-navigation__responsive-container{z-index:999998}
+.wp-block-site-logo a {display: inline-block;line-height: 0;}
 .wp-block-site-logo.aligncenter{margin-left:auto;margin-right:auto;display:table}
 .wp-site-blocks h2.wp-block-post-title{-ms-word-wrap:break-word;word-wrap:break-word}
 .wp-site-blocks h2.wp-block-post-title a{display:initial}
