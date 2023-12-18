@@ -1,5 +1,9 @@
 *** Dat Theme Changelog ***
 
+= 1.7.2 - 2023/12/18 =
+* This release has a bug fix for Google reCAPTCHA iframe on ios
+* Fix - z-index button conflict with Google reCaptcha iframe on ios 
+
 = 1.7.1 - 2023/12/08 =
 * This release tweaks the Clamp mobile small font size from 14to 15px
 * Tweak - Update Small font size default from clamp [0.875rem - 1rem] to [0.938rem - 1rem] ~ [14px - 16px] to [15px - 16px]
