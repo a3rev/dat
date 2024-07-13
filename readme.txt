@@ -2,8 +2,8 @@
 Contributors: a3rev Software team
 Tags: BlockPress Child 
 Requires at least: 6.1
-Tested up to: 6.2
-Stable tag: 1.7.2
+Tested up to: 6.6
+Stable tag: 1.8.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
