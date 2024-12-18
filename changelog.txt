@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.8.1 - 2024/12/18 =
+* This maintenance release has 2 bug fixes and compatibility with WordPress 6.7 and WooCommerce 9.5
+* Tweak - Test for compatibility with WordPress 6.7 and WooCommerce 9.5
+* Fix - Update CSS for height of quantity selector for work compatibility with WC 9.5
+* Fix - Update CSS for the View Cart button on WC message not transparent for work compatibility with WC 9.5
+
 = 1.8.0 - 2024/07/13 =
 * This is a release with various code tweaks for compatibility with WordPress major version 6.6.0
 * Tweak - Remove theme.json from DAT child theme

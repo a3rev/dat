@@ -132,7 +132,7 @@ div[data-block-name*="woocommerce"] .woocommerce-error,div[data-block-name*="woo
 .woocommerce div.product .woocommerce-product-summary div.images{margin-bottom:0;}
 .woocommerce-page .is-flex-container li,.woocommerce-page .is-layout-grid li,.wc-block-grid__products li.wc-block-grid__product{transition:transform .2s;}
 .woocommerce-page .is-flex-container li:hover,.woocommerce-page .is-layout-grid li:hover,.wc-block-grid__products li.wc-block-grid__product:hover{transform:scale(1.05);}
-.woocommerce div.product form.cart div.quantity .qty{margin-right:0;}
+.woocommerce div.product form.cart div.quantity .qty{margin-right:0;height:auto;}
 .single-product.woocommerce-page .product .summary .woocommerce-product-details__short-description{margin:0;}
 .single-product.woocommerce-page .product .summary .woocommerce-tabs{border:none;margin:0;}
 .single-product.woocommerce-page .product .summary #prouduct_tabs{margin:0;}
@@ -166,7 +166,7 @@ div[data-block-name*="woocommerce"] .woocommerce-error,div[data-block-name*="woo
 .single-product .wc-block-components-notice-banner.is-error{display:flex;align-items:center;}
 .single-product .wc-block-components-notice-banner>.wc-block-components-notice-banner__content{display:flex;flex-direction:row-reverse;justify-content:space-between;align-items:center;}
 .woocommerce span a.added_to_cart{margin:0;padding:0;}
-.single-product .wc-block-components-notice-banner>.wc-block-components-notice-banner__content .wc-forward{background-color:var(--wp--preset--color--dark-black);border-radius:4px;border-color:var(--wp--preset--color--dark-black);border-width:1px;border-style:solid;color:var(--wp--preset--color--white)!important;font-family:inherit;font-size:inherit;line-height:inherit;padding-top:var(--wp--custom--button-padding-top)!important;padding-right:var(--wp--custom--button-padding-right)!important;padding-bottom:var(--wp--custom--button-padding-bottom)!important;padding-left:var(--wp--custom--button-padding-left)!important;text-decoration:none;opacity:1;}
+.single-product .wc-block-components-notice-banner>.wc-block-components-notice-banner__content .wc-forward{background-color:var(--wp--preset--color--dark-black !important);border-radius:4px;border-color:var(--wp--preset--color--dark-black);border-width:1px;border-style:solid;color:var(--wp--preset--color--white)!important;font-family:inherit;font-size:inherit;line-height:inherit;padding-top:var(--wp--custom--button-padding-top)!important;padding-right:var(--wp--custom--button-padding-right)!important;padding-bottom:var(--wp--custom--button-padding-bottom)!important;padding-left:var(--wp--custom--button-padding-left)!important;text-decoration:none;opacity:1;}
 .woocommerce-checkout #customer_details label{margin-bottom:0;}
 .woocommerce-checkout #ship-to-different-address br,.checkout_coupon.woocommerce-form-coupon br{display:none;}
 .woocommerce-checkout #customer_details p:empty{display:none;}
