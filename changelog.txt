@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.8.2 - 2025/04/14 =
+* This maintenance release has a small tweak and compatibility with WordPress 6.8 and WooCommerce 9.8 
+* Tweak - Update WooCommerce sale badge
+* Tweak - Tested for compatibility with WordPress 6.8
+* Tweak - Tested for compatibility with WooCommerce 9.8
+
 = 1.8.1 - 2024/12/18 =
 * This maintenance release has 2 bug fixes and compatibility with WordPress 6.7 and WooCommerce 9.5
 * Tweak - Test for compatibility with WordPress 6.7 and WooCommerce 9.5
