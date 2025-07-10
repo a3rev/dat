@@ -6,6 +6,9 @@
  * @since 1.3.2
  */
 
+
+function dat_register_block_patterns() {
+
 /**
  * Register Block Pattern Category.
  */
@@ -163,3 +166,7 @@ if (function_exists('register_block_pattern')) {
 
     );
 }
+
+}
+
+add_action( 'init', 'dat_register_block_patterns' );
