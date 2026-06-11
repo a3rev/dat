@@ -1,5 +1,12 @@
 *** Dat Theme Changelog ***
 
+= 1.9.0 - 2025/06/11 =
+* This release fixes a critical SEO bug - missing H1 heading on all pages, with compatibility for WordPress 7.0
+* Tweak - Tested for compatibility with WordPress 7.0
+* Fix - Change Post Title block heading level from H2 to H1 in all single-page templates (Single Post, Page, Single Product, Cart, Checkout and their sidebar variants)
+* Fix - Change front page hero heading from H2 to H1 in home.html template
+* Fix - Ensures every page rendered by the theme has exactly one H1 element for correct document outline and SEO
+
 = 1.8.4 - 2025/08/21 =
 * This maintenance release compatibility with WooCommerce 10.1.0
 * Tweak - Tested for compatibility with WooCommerce 10.1.0
