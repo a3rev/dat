@@ -118,34 +118,60 @@ input#wp-submit {
         $message = '';
 
         if( isset( $_POST ) && isset( $_POST['submit'] ) ){
-            if( check_ajax_referer( 'dat_theme', '_wpnonce_dat_theme_settings', false) ){
-                
-                if( is_array( $_POST ) ){
+            if( check_ajax_referer( 'dat_theme', '_wpnonce_dat_theme_settings', false) && current_user_can( 'manage_options' ) ){
 
-                    $postSettings = $_POST;
-                    unset( $postSettings['_wpnonce_dat_theme_settings'] );
-                    unset( $postSettings['_wp_http_referer'] );
-                    unset( $postSettings['submit'] );
+                // Allow-list: only known settings keys are accepted; each is sanitized by type.
+                $postSettings = array();
 
-                    if( is_array($postSettings) ){
+                foreach ( $this->default as $key => $default_value ) {
 
-                        foreach( $postSettings as $key => $value ){
-                            if( isset( $_POST[ $key ] ) && $_POST[ $key ] == 'true' ){
-                                $postSettings[$key] = true;
-                            }elseif( isset( $_POST[ $key ] ) && $_POST[ $key ] == 'false' ){
-                                $postSettings[$key] = false;
-                            }else{
-                                $postSettings[$key] = stripslashes( $postSettings[$key] );
-                            }
-                            
+                    if ( ! isset( $_POST[ $key ] ) ) {
+                        // Unchecked checkboxes are not sent; keep boolean defaults as false.
+                        if ( is_bool( $default_value ) ) {
+                            $postSettings[ $key ] = false;
                         }
+                        continue;
+                    }
 
-                        $settings =  array_merge( $this->default, $postSettings );
-                        update_option( '_dat_theme_settings' , $settings );
-                        $message = '<div id="setting-error-settings_updated" class="notice notice-success settings-error is-dismissible"> 
-                        <p><strong>'.__( 'Settings updated.' ).'</strong></p></div>';
+                    $raw_value = wp_unslash( $_POST[ $key ] );
+
+                    switch ( $key ) {
+                        case 'site_maintenance':
+                        case 'scroll_top':
+                        case 'login_modal':
+                        case 'single_product_legacy':
+                        case 'single_product_title':
+                            $postSettings[ $key ] = ( $raw_value === 'true' || $raw_value === '1' || $raw_value === true );
+                            break;
+
+                        case 'login_form_logo':
+                        case 'signup_url':
+                            $postSettings[ $key ] = esc_url_raw( $raw_value );
+                            break;
+
+                        case 'login_form_css':
+                            $postSettings[ $key ] = wp_strip_all_tags( $raw_value );
+                            break;
+
+                        case 'grid_card_mobile':
+                        case 'grid_product_card_mobile':
+                            $postSettings[ $key ] = absint( $raw_value );
+                            break;
+
+                        case 'signup_text':
+                            $postSettings[ $key ] = sanitize_text_field( $raw_value );
+                            break;
+
+                        default:
+                            $postSettings[ $key ] = sanitize_text_field( $raw_value );
+                            break;
                     }
                 }
+
+                $settings =  array_merge( $this->default, $postSettings );
+                update_option( '_dat_theme_settings' , $settings );
+                $message = '<div id="setting-error-settings_updated" class="notice notice-success settings-error is-dismissible">
+                <p><strong>'.__( 'Settings updated.' ).'</strong></p></div>';
             }
         }
 
@@ -229,7 +255,7 @@ input#wp-submit {
                         <tr>
                             <th scope="row"><label for="login_form_css"><?php _e( 'Login CSS' ); ?></label></th>
                             <td>
-                                <textarea cols="100" rows="10" name="login_form_css" id="login_form_css" aria-describedby="editor-keyboard-trap-help-1 editor-keyboard-trap-help-2 editor-keyboard-trap-help-3 editor-keyboard-trap-help-4"><?php echo $settings['login_form_css'];?></textarea>
+                                <textarea cols="100" rows="10" name="login_form_css" id="login_form_css" aria-describedby="editor-keyboard-trap-help-1 editor-keyboard-trap-help-2 editor-keyboard-trap-help-3 editor-keyboard-trap-help-4"><?php echo esc_textarea( $settings['login_form_css'] );?></textarea>
                             </td>
                         </tr>
 

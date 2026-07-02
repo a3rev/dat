@@ -45,8 +45,41 @@ class Theme_Hook
 
         $icon = apply_filters( 'scroll_top_button_svg', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="arrowchevrontop" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 263.55c4.3 4.28 11.3 4.3 15.62.05 4.33-4.26 4.35-11.19.05-15.47L263.83 3.22c-4.3-4.27-11.3-4.3-15.63-.04L3.21 248.13c-4.3 4.28-4.28 11.21.05 15.47 4.32 4.25 11.32 4.23 15.62-.05L255.99 26.48l237.13 237.07z"/></svg>' );
         ?>
-        <button onclick="datTopFunction()" id="scrollTopButton" title="<?php _e( 'Go to top' ); ?>" class="srcoll-to-top"><?php echo $icon; ?></button>
+        <button onclick="datTopFunction()" id="scrollTopButton" title="<?php _e( 'Go to top' ); ?>" class="srcoll-to-top"><?php echo wp_kses( $icon, self::get_svg_kses_allowed_html() ); ?></button>
         <?php
+    }
+
+    /**
+     * Allowed SVG markup for wp_kses() when echoing filterable icon output.
+     *
+     * @access private
+     * @return array
+     */
+    private static function get_svg_kses_allowed_html()
+    {
+        return array(
+            'svg' => array(
+                'xmlns'         => true,
+                'width'         => true,
+                'height'        => true,
+                'class'         => true,
+                'fill-rule'     => true,
+                'clip-rule'     => true,
+                'viewbox'       => true,
+                'viewBox'       => true,
+                'aria-hidden'   => true,
+                'focusable'     => true,
+                'role'          => true,
+            ),
+            'path' => array(
+                'fill-rule' => true,
+                'fill'      => true,
+                'd'         => true,
+            ),
+            'g'    => array(
+                'fill' => true,
+            ),
+        );
     }
 
     public function webfonts_local(){
@@ -118,7 +151,7 @@ class Theme_Hook
             }';
         }
 
-        wp_add_inline_style( 'theme-layout', $styles );
+        wp_add_inline_style( 'theme-layout', wp_strip_all_tags( $styles ) );
 
         wp_enqueue_style(
             'theme-style',
@@ -143,10 +176,11 @@ class Theme_Hook
             true
         );
 
-        $localize_script = array( 
+        $localize_script = array(
             'ajax_url' => admin_url( 'admin-ajax.php' ),
             'wp_is_mobile'                  => wp_is_mobile() ? true : false,
             'is_user_logged_in'             => is_user_logged_in() ? true : false,
+            'ajax_login_nonce'              => wp_create_nonce( 'dat_ajax_login' ),
         );
 
         $localize_script = apply_filters( '_theme_localize_script', $localize_script );
@@ -352,10 +386,13 @@ class Theme_Hook
     }
 
     public function _theme_ajax_login() {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'];
-        
+
+        check_ajax_referer( 'dat_ajax_login', 'security' );
+
+        $username = sanitize_user( wp_unslash( isset( $_POST['username'] ) ? $_POST['username'] : '' ) );
+        $password = isset( $_POST['password'] ) ? $_POST['password'] : '';
+        $remember = ! empty( $_POST['remember'] );
+
         $creds = array(
             'user_login' => $username,
             'user_password' => $password,
@@ -363,14 +400,13 @@ class Theme_Hook
         );
 
         $secure_cookie   = '';
-            
-        // If the user wants SSL but the session is not SSL, force a secure cookie.
-        if ( ! empty( $_POST['username'] ) && ! force_ssl_admin() ) {
-            $user_name = sanitize_user( wp_unslash( $_POST['username'] ) );
-            $user      = get_user_by( 'login', $user_name );
 
-            if ( ! $user && strpos( $user_name, '@' ) ) {
-                $user = get_user_by( 'email', $user_name );
+        // If the user wants SSL but the session is not SSL, force a secure cookie.
+        if ( ! empty( $username ) && ! force_ssl_admin() ) {
+            $user = get_user_by( 'login', $username );
+
+            if ( ! $user && strpos( $username, '@' ) ) {
+                $user = get_user_by( 'email', $username );
             }
 
             if ( $user ) {
@@ -384,19 +420,11 @@ class Theme_Hook
         $user = wp_signon( $creds, $secure_cookie);
 
         if (is_wp_error($user)) {
-            if (!empty($user->errors)) {
-                foreach( $user->errors as $error_code ){
-                    $err .= $error_code[0];
-                }
-            } else {
-                $err = "invalid credentials username or password.";
-            }
-            echo json_encode(array('message' => $err));
+            $err = __( 'Invalid username or password.', 'dat' );
+            wp_send_json_error( array( 'message' => $err ) );
         } else {
-            echo 'success';
+            wp_send_json_success( array( 'message' => 'success' ) );
         }
-
-        wp_die();
     }
 
     public function _theme_popup_login(){
@@ -459,7 +487,7 @@ class Theme_Hook
 
                                 'echo'           => true,
                                 // Default 'redirect' value takes the user back to the request URI.
-                                'redirect'       => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+                                'redirect'       => esc_url_raw( ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ),
                                 'form_id'        => 'loginform',
                                 'label_username' => __( 'Username or email address' ),
                                 'label_password' => __( 'Password' ),
@@ -514,7 +542,7 @@ class Theme_Hook
                             <?php
 
                             if ( !empty( $signup_url ) ) {
-                                $signup_url = sprintf( '<div class="signup-wrapper"><a href="%s" class="popup-signup-btn button wp-element-button">%s</a></div>', esc_url( $signup_url ), $signup_text );
+                                $signup_url = sprintf( '<div class="signup-wrapper"><a href="%s" class="popup-signup-btn button wp-element-button">%s</a></div>', esc_url( $signup_url ), esc_html( $signup_text ) );
                                 /** This filter is documented in wp-includes/general-template.php */
                                 echo apply_filters( 'signup', $signup_url );
                             }
@@ -541,7 +569,7 @@ class Theme_Hook
 
         echo '<style type="text/css">';
         if( $login_form_css !== false ){
-            echo $login_form_css;
+            echo wp_strip_all_tags( $login_form_css );
         }
         if( !empty($login_form_logo) ){
             echo 'body #login h1 a {
@@ -559,7 +587,7 @@ class Theme_Hook
             <script type="text/javascript">
                 document.addEventListener('DOMContentLoaded', function() {
                     var loginTitleLink = document.querySelector('#login h1 a');
-                    loginTitleLink.innerHTML = '<img src="<?php echo $login_form_logo;?>" />';
+                    loginTitleLink.innerHTML = '<img src="<?php echo esc_url( $login_form_logo );?>" />';
                     loginTitleLink.href="<?php echo get_site_url(); ?>"; 
                 });
             </script>

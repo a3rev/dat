@@ -33,7 +33,8 @@ if (class_exists('WooCommerce')) {
 }
 
 // Maintenance
-$pos = strpos( $_SERVER['REQUEST_URI'] , 'wp-login.php');
+$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+$pos = strpos( $request_uri , 'wp-login.php');
 
 if( class_exists('\A3Rev\DKeeper\Doorkeeper') ){
 
@@ -49,11 +50,11 @@ if( class_exists('\A3Rev\DKeeper\Doorkeeper') ){
         $wp_hide_login_slug = '/wp-login.php';
     }
 
-    if( $wp_hide_login == 'yes' && $_SERVER['REQUEST_URI'] == $wp_hide_login_slug ){
+    if( $wp_hide_login == 'yes' && $request_uri == $wp_hide_login_slug ){
         $pos = true;
     }
 
-    if( $wp_hide_login == 'yes' && $_SERVER['REQUEST_URI'] == $wp_hide_login_slug2 ){
+    if( $wp_hide_login == 'yes' && $request_uri == $wp_hide_login_slug2 ){
         $pos = true;
     }
 
@@ -65,11 +66,11 @@ if( $pos === false ){
 
     $site_maintenance = is_array($theme_options) && isset($theme_options['site_maintenance']) ? (boolean)$theme_options['site_maintenance'] : false;
 
-    $is_ajax_login = strpos( $_SERVER['REQUEST_URI'] , 'admin-ajax.php');
+    $is_ajax_login = strpos( $request_uri , 'admin-ajax.php');
 
     if( !is_user_logged_in() && $site_maintenance && !$is_ajax_login ){
-        if( $_SERVER['REQUEST_URI'] != '/maintenance/' ){
-            @wp_redirect(get_home_url().'/maintenance/');
+        if( $request_uri != '/maintenance/' ){
+            wp_redirect(get_home_url().'/maintenance/');
             exit();
         }
     }

@@ -34,24 +34,25 @@
                         url: _theme_params.ajax_url,
                         data: {
                             action: 'ajax_login',
+                            security: _theme_params.ajax_login_nonce,
                             username: $('#user_login').val(),
                             password: $('#user_pass').val(),
                             remember: $('#rememberme').is(":checked"),
                         },
                         beforeSend: function() {
                             $( '#login-modal .block-modal' ).show();
-                            $(this).prop('disabled', false);  
+                            $(this).prop('disabled', false);
                         },
-                        success: function(data) {
+                        success: function(response) {
 
-                            if (data === 'success') {
+                            if (response && response.success) {
                                 window.location.reload();
                             } else {
-                                var returnedData = JSON.parse(data);
-                                $('#ajax-login-message').html('<div class="modal-message">'+returnedData.message+'</div>');
+                                var message = ( response && response.data && response.data.message ) ? response.data.message : '';
+                                $('#ajax-login-message').html('<div class="modal-message">'+message+'</div>');
                             }
                             $( '#login-modal .block-modal' ).hide();
-                            $(this).prop('disabled', true);  
+                            $(this).prop('disabled', true);
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.responseText);
