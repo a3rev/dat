@@ -17,7 +17,7 @@ function _theme_register_block_styles()
             'core/template-part',
             array(
                 'name'  => 'sticky-header',
-                'label' => __('Sticky header'),
+                'label' => __( 'Sticky header', 'dat' ),
             )
         );
     }

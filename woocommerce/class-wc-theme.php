@@ -170,22 +170,22 @@ class WC_Theme
     public static function default_template_types( $default_template_types ) {
 
         $default_template_types['single-product'] = array(
-            'title'       => esc_attr__( 'Single product' ),
+            'title'       => esc_attr__( 'Single product', 'dat' ),
             'description' => '',
         );
 
         $default_template_types['archive-product'] = array(
-            'title'       => esc_attr__( 'Archive Product' ),
+            'title'       => esc_attr__( 'Archive Product', 'dat' ),
             'description' => '',
         );
 
         $default_template_types['taxonomy-product_cat'] = array(
-            'title'       => esc_attr__( 'Product categories' ),
+            'title'       => esc_attr__( 'Product categories', 'dat' ),
             'description' => '',
         );
 
         $default_template_types['taxonomy-product_tag'] = array(
-            'title'       => esc_attr__( 'Product tags' ),
+            'title'       => esc_attr__( 'Product tags', 'dat' ),
             'description' => '',
         );
         
@@ -211,15 +211,6 @@ class WC_Theme
         }
     }
 
-    public static function _theme_tweak_layout_result_count_catalog_ordering(){
-        remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
-        remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-    }
-
-    /**
-     * Woocommerce
-     * add_filter( 'woocommerce_enqueue_styles', '__return_false' ); */
-
     public static function _dequeue_styles($enqueue_styles)
     {
 
@@ -227,28 +218,6 @@ class WC_Theme
         //unset( $enqueue_styles['woocommerce-layout'] );       // Remove woocommerce-layout.css
         //unset( $enqueue_styles['woocommerce-smallscreen'] );  // Remove the woocommerce-smallscreen.css
         return $enqueue_styles;
-    }
-
-    /**
-     * custom_woocommerce_template_loop_product_title
-     * */
-
-    public static function custom_woocommerce_template_loop_product_title()
-    {
-        echo '<h3 class="' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . esc_attr(get_the_title()) . '</h3>';
-    }
-
-    /**
-     * custom_wc_loop_product_title
-     * */
-
-    public static function custom_wc_loop_product_title()
-    {
-
-        if (is_home() || is_front_page()) {
-            remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
-            add_action('woocommerce_shop_loop_item_title', array( __CLASS__, 'custom_woocommerce_template_loop_product_title', 10));
-        }
     }
 
     public static function woocommerce_show_page_title($display)
