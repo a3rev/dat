@@ -1,5 +1,12 @@
 *** Dat Theme Changelog ***
 
+= 1.9.1 - 2026/07/02 =
+* Security hardening for login handling and settings output escaping
+* Tweak - Hardened the popup login AJAX handler with request verification and generic error messaging
+* Tweak - Improved sanitization and escaping of theme settings values on save and output
+* Tweak - Improved escaping of filterable output in the footer and login page
+* Tweak - Code hygiene: added missing text domains, removed dead/unhooked code
+
 = 1.9.0 - 2025/06/11 =
 * This release fixes a critical SEO bug - missing H1 heading on all pages, with compatibility for WordPress 7.0
 * Tweak - Tested for compatibility with WordPress 7.0

@@ -108,7 +108,7 @@ input#wp-submit {
     public function register_admin_screen () {
 
         if ( current_user_can( 'manage_options' ) ){
-            $add_submenu_page = add_submenu_page( 'themes.php', __( 'DAT Settings' ), __( 'DAT Settings' ), 'manage_options', 'dat', array( &$this, 'admin_screen' ) ); // Default
+            $add_submenu_page = add_submenu_page( 'themes.php', __( 'DAT Settings', 'dat' ), __( 'DAT Settings', 'dat' ), 'manage_options', 'dat', array( &$this, 'admin_screen' ) ); // Default
         }
 
     }
@@ -118,34 +118,60 @@ input#wp-submit {
         $message = '';
 
         if( isset( $_POST ) && isset( $_POST['submit'] ) ){
-            if( check_ajax_referer( 'dat_theme', '_wpnonce_dat_theme_settings', false) ){
-                
-                if( is_array( $_POST ) ){
+            if( check_ajax_referer( 'dat_theme', '_wpnonce_dat_theme_settings', false) && current_user_can( 'manage_options' ) ){
 
-                    $postSettings = $_POST;
-                    unset( $postSettings['_wpnonce_dat_theme_settings'] );
-                    unset( $postSettings['_wp_http_referer'] );
-                    unset( $postSettings['submit'] );
+                // Allow-list: only known settings keys are accepted; each is sanitized by type.
+                $postSettings = array();
 
-                    if( is_array($postSettings) ){
+                foreach ( $this->default as $key => $default_value ) {
 
-                        foreach( $postSettings as $key => $value ){
-                            if( isset( $_POST[ $key ] ) && $_POST[ $key ] == 'true' ){
-                                $postSettings[$key] = true;
-                            }elseif( isset( $_POST[ $key ] ) && $_POST[ $key ] == 'false' ){
-                                $postSettings[$key] = false;
-                            }else{
-                                $postSettings[$key] = stripslashes( $postSettings[$key] );
-                            }
-                            
+                    if ( ! isset( $_POST[ $key ] ) ) {
+                        // Unchecked checkboxes are not sent; keep boolean defaults as false.
+                        if ( is_bool( $default_value ) ) {
+                            $postSettings[ $key ] = false;
                         }
+                        continue;
+                    }
 
-                        $settings =  array_merge( $this->default, $postSettings );
-                        update_option( '_dat_theme_settings' , $settings );
-                        $message = '<div id="setting-error-settings_updated" class="notice notice-success settings-error is-dismissible"> 
-                        <p><strong>'.__( 'Settings updated.' ).'</strong></p></div>';
+                    $raw_value = wp_unslash( $_POST[ $key ] );
+
+                    switch ( $key ) {
+                        case 'site_maintenance':
+                        case 'scroll_top':
+                        case 'login_modal':
+                        case 'single_product_legacy':
+                        case 'single_product_title':
+                            $postSettings[ $key ] = ( $raw_value === 'true' || $raw_value === '1' || $raw_value === true );
+                            break;
+
+                        case 'login_form_logo':
+                        case 'signup_url':
+                            $postSettings[ $key ] = esc_url_raw( $raw_value );
+                            break;
+
+                        case 'login_form_css':
+                            $postSettings[ $key ] = wp_strip_all_tags( $raw_value );
+                            break;
+
+                        case 'grid_card_mobile':
+                        case 'grid_product_card_mobile':
+                            $postSettings[ $key ] = absint( $raw_value );
+                            break;
+
+                        case 'signup_text':
+                            $postSettings[ $key ] = sanitize_text_field( $raw_value );
+                            break;
+
+                        default:
+                            $postSettings[ $key ] = sanitize_text_field( $raw_value );
+                            break;
                     }
                 }
+
+                $settings =  array_merge( $this->default, $postSettings );
+                update_option( '_dat_theme_settings' , $settings );
+                $message = '<div id="setting-error-settings_updated" class="notice notice-success settings-error is-dismissible">
+                <p><strong>'.__( 'Settings updated.', 'dat' ).'</strong></p></div>';
             }
         }
 
@@ -153,7 +179,7 @@ input#wp-submit {
             if( check_ajax_referer( 'dat_theme', '_wpnonce_dat_theme_settings', false) ){
                 delete_option( '_dat_theme_settings' );
                 $message = '<div id="setting-error-settings_updated" class="notice notice-success settings-error is-dismissible"> 
-                        <p><strong>'.__( 'Settings is reset.' ).'</strong></p></div>';
+                        <p><strong>'.__( 'Settings is reset.', 'dat' ).'</strong></p></div>';
             }
         }
 
@@ -171,132 +197,132 @@ input#wp-submit {
 
         <div class="wrap">
 
-            <h1><?php _e( 'BlockPress Settings' ); ?></h1>
+            <h1><?php esc_html_e( 'DAT Settings', 'dat' ); ?></h1>
             <?php echo $message; ?>
             <form method="post" action="themes.php?page=dat">
                 <?php wp_nonce_field( 'dat_theme', '_wpnonce_dat_theme_settings' ); ?>
                 <table class="form-table" role="presentation">
                     <tbody>
                         <tr>
-                            <th scope="row"><label for="site_maintenance"><?php _e( 'Maintenance' ); ?></label></th>
+                            <th scope="row"><label for="site_maintenance"><?php esc_html_e( 'Maintenance', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="site_maintenance">
                                         <input name="site_maintenance" type="checkbox" id="site_maintenance" value="true" <?php  echo ( isset( $settings['site_maintenance'] ) && $settings['site_maintenance'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Checked maintenance site' ); ?>
+                                        <?php esc_html_e( 'Checked maintenance site', 'dat' ); ?>
                                     </label>
-                                    <p class="description"><?php _e( 'Create a page with slug is "maintenance"' ); ?></p>
+                                    <p class="description"><?php esc_html_e( 'Create a page with slug is "maintenance"', 'dat' ); ?></p>
                                 </fieldset>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="scroll_top"><?php _e( 'Scroll Top Button' ); ?></label></th>
+                            <th scope="row"><label for="scroll_top"><?php esc_html_e( 'Scroll Top Button', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
             
                                     <label for="scroll_top">
                                         <input name="scroll_top" type="checkbox" id="scroll_top" value="true" <?php  echo ( isset( $settings['scroll_top'] ) && $settings['scroll_top'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Disable scroll top button.' ); ?>
+                                        <?php esc_html_e( 'Disable scroll top button.', 'dat' ); ?>
                                     </label>
                                 </fieldset>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="grid_card_mobile"><?php _e( 'Grid Card Mobile' ); ?></label></th>
+                            <th scope="row"><label for="grid_card_mobile"><?php esc_html_e( 'Grid Card Mobile', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="grid_card_mobile">
                                         <select name="grid_card_mobile" id="grid_card_mobile">
-                                            <option value="1" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php _e( '1 column' ); ?></option>
-                                            <option value="2" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php _e( '2 columns' ); ?></option>
+                                            <option value="1" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php esc_html_e( '1 column', 'dat' ); ?></option>
+                                            <option value="2" <?php  echo ( isset( $settings['grid_card_mobile'] ) && $settings['grid_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php esc_html_e( '2 columns', 'dat' ); ?></option>
                                         </select>
-                                        <?php _e( 'Choose columns for grid card show on Mobile on devices.' ); ?>
+                                        <?php esc_html_e( 'Choose columns for grid card show on Mobile on devices.', 'dat' ); ?>
                                     </label>
                                 </fieldset>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="login_form_logo"><?php _e( 'Login Logo' ); ?></label></th>
+                            <th scope="row"><label for="login_form_logo"><?php esc_html_e( 'Login Logo', 'dat' ); ?></label></th>
                             <td>
                                 <input name="login_form_logo" type="text" id="login_form_logo" value="<?php echo ( isset( $settings['login_form_logo'] ) ) ? esc_attr($settings['login_form_logo']) : '' ?>">
-                                <p class="description"><?php _e( 'Enter Logo URL' ); ?></p>
+                                <p class="description"><?php esc_html_e( 'Enter Logo URL', 'dat' ); ?></p>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="login_form_css"><?php _e( 'Login CSS' ); ?></label></th>
+                            <th scope="row"><label for="login_form_css"><?php esc_html_e( 'Login CSS', 'dat' ); ?></label></th>
                             <td>
-                                <textarea cols="100" rows="10" name="login_form_css" id="login_form_css" aria-describedby="editor-keyboard-trap-help-1 editor-keyboard-trap-help-2 editor-keyboard-trap-help-3 editor-keyboard-trap-help-4"><?php echo $settings['login_form_css'];?></textarea>
+                                <textarea cols="100" rows="10" name="login_form_css" id="login_form_css" aria-describedby="editor-keyboard-trap-help-1 editor-keyboard-trap-help-2 editor-keyboard-trap-help-3 editor-keyboard-trap-help-4"><?php echo esc_textarea( $settings['login_form_css'] );?></textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="login_modal"><?php _e( 'Login Modal' ); ?></label></th>
+                            <th scope="row"><label for="login_modal"><?php esc_html_e( 'Login Modal', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
             
                                     <label for="login_modal">
                                         <input name="login_modal" type="checkbox" id="login_modal" value="true" <?php  echo ( isset( $settings['login_modal'] ) && $settings['login_modal'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Checked will enable login modal.' ); ?>
+                                        <?php esc_html_e( 'Checked will enable login modal.', 'dat' ); ?>
                                     </label>
-                                    <p class="description"><?php _e( 'While enable with class ".login-popup" click will open popup login.' ); ?></p>
+                                    <p class="description"><?php esc_html_e( 'While enable with class ".login-popup" click will open popup login.', 'dat' ); ?></p>
                                 </fieldset>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="signup_text"><?php _e( 'Sign Up URL' ); ?></label></th>
+                            <th scope="row"><label for="signup_text"><?php esc_html_e( 'Sign Up URL', 'dat' ); ?></label></th>
                             <td>
-                                <input name="signup_text" type="text" id="signup_text" value="<?php echo ( isset( $settings['signup_text'] ) ) ? esc_attr($settings['signup_text']) : __('Sign Up') ?>">
-                                <p class="description"><?php _e( 'Enter text for Sign Up button. ' ); ?></p>
+                                <input name="signup_text" type="text" id="signup_text" value="<?php echo ( isset( $settings['signup_text'] ) ) ? esc_attr($settings['signup_text']) : esc_attr__('Sign Up', 'dat') ?>">
+                                <p class="description"><?php esc_html_e( 'Enter text for Sign Up button. ', 'dat' ); ?></p>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row"><label for="signup_url"><?php _e( 'Sign Up URL' ); ?></label></th>
+                            <th scope="row"><label for="signup_url"><?php esc_html_e( 'Sign Up URL', 'dat' ); ?></label></th>
                             <td>
                                 <input name="signup_url" type="text" id="signup_url" value="<?php echo ( isset( $settings['signup_url'] ) ) ? esc_attr($settings['signup_url']) : '' ?>">
-                                <p class="description"><?php _e( 'Enter Sign Up URL. ' ); ?></p>
+                                <p class="description"><?php esc_html_e( 'Enter Sign Up URL. ', 'dat' ); ?></p>
                             </td>
                         </tr>
                         <?php
                         if( class_exists('WooCommerce') ){
                         ?>
                         <tr>
-                            <th scope="row"><label for="grid_product_card_mobile"><?php _e( 'Grid Product Card Mobile' ); ?></label></th>
+                            <th scope="row"><label for="grid_product_card_mobile"><?php esc_html_e( 'Grid Product Card Mobile', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="grid_product_card_mobile">
                                         <select name="grid_product_card_mobile" id="grid_product_card_mobile">
-                                            <option value="1" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php _e( '1 column' ); ?></option>
-                                            <option value="2" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php _e( '2 columns' ); ?></option>
+                                            <option value="1" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 1 ? ' selected="selected"' : '' )?>><?php esc_html_e( '1 column', 'dat' ); ?></option>
+                                            <option value="2" <?php  echo ( isset( $settings['grid_product_card_mobile'] ) && $settings['grid_product_card_mobile'] == 2 ? ' selected="selected"' : '' )?>><?php esc_html_e( '2 columns', 'dat' ); ?></option>
                                         </select>
-                                        <?php _e( 'Choose columns for grid product card show on Mobile on devices.' ); ?>
+                                        <?php esc_html_e( 'Choose columns for grid product card show on Mobile on devices.', 'dat' ); ?>
                                     </label>
                                 </fieldset>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="single_product_legacy"><?php _e( 'Single Product Template' ); ?></label></th>
+                            <th scope="row"><label for="single_product_legacy"><?php esc_html_e( 'Single Product Template', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="single_product_legacy">
                                         <input name="single_product_legacy" type="checkbox" id="single_product_legacy" value="true" <?php  echo ( isset( $settings['single_product_legacy'] ) && $settings['single_product_legacy'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Check to replace the WooCommerce Single Product Block Template with the legacy Template.' ); ?>
+                                        <?php esc_html_e( 'Check to replace the WooCommerce Single Product Block Template with the legacy Template.', 'dat' ); ?>
                                     </label>
                                 </fieldset>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="single_product_title"><?php _e( 'Show Product Title' ); ?></label></th>
+                            <th scope="row"><label for="single_product_title"><?php esc_html_e( 'Show Product Title', 'dat' ); ?></label></th>
                             <td>
                                 <fieldset>
                                     <label for="single_product_title">
                                         <input name="single_product_title" type="checkbox" id="single_product_title" value="true" <?php  echo ( isset( $settings['single_product_title'] ) && $settings['single_product_title'] == true ? ' checked="checked"' : '' )?>>
-                                        <?php _e( 'Checked to show single product title on summary with legacy single template' ); ?>
+                                        <?php esc_html_e( 'Checked to show single product title on summary with legacy single template', 'dat' ); ?>
                                     </label>
                                 </fieldset>
                             </td>
@@ -309,7 +335,7 @@ input#wp-submit {
                 </tbody>
                 </table>
                 
-                <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Save Changes' ); ?>"> <input type="submit" name="reset" id="reset" class="button button-secondary" value="<?php _e( 'Reset' ); ?>" onclick="return confirm('<?php _e( 'Are you sure you want reset to default settings?' ); ?>');"></p>
+                <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'dat' ); ?>"> <input type="submit" name="reset" id="reset" class="button button-secondary" value="<?php esc_attr_e( 'Reset', 'dat' ); ?>" onclick="return confirm('<?php echo esc_js( __( 'Are you sure you want reset to default settings?', 'dat' ) ); ?>');"></p>
             </form>
         </div>
 

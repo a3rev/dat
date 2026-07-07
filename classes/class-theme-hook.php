@@ -45,14 +45,45 @@ class Theme_Hook
 
         $icon = apply_filters( 'scroll_top_button_svg', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="arrowchevrontop" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 263.55c4.3 4.28 11.3 4.3 15.62.05 4.33-4.26 4.35-11.19.05-15.47L263.83 3.22c-4.3-4.27-11.3-4.3-15.63-.04L3.21 248.13c-4.3 4.28-4.28 11.21.05 15.47 4.32 4.25 11.32 4.23 15.62-.05L255.99 26.48l237.13 237.07z"/></svg>' );
         ?>
-        <button onclick="datTopFunction()" id="scrollTopButton" title="<?php _e( 'Go to top' ); ?>" class="srcoll-to-top"><?php echo $icon; ?></button>
+        <button onclick="datTopFunction()" id="scrollTopButton" title="<?php esc_attr_e( 'Go to top', 'dat' ); ?>" class="srcoll-to-top"><?php echo wp_kses( $icon, self::get_svg_kses_allowed_html() ); ?></button>
         <?php
+    }
+
+    /**
+     * Allowed SVG markup for wp_kses() when echoing filterable icon output.
+     *
+     * @access private
+     * @return array
+     */
+    private static function get_svg_kses_allowed_html()
+    {
+        return array(
+            'svg' => array(
+                'xmlns'         => true,
+                'width'         => true,
+                'height'        => true,
+                'class'         => true,
+                'fill-rule'     => true,
+                'clip-rule'     => true,
+                'viewbox'       => true,
+                'viewBox'       => true,
+                'aria-hidden'   => true,
+                'focusable'     => true,
+                'role'          => true,
+            ),
+            'path' => array(
+                'fill-rule' => true,
+                'fill'      => true,
+                'd'         => true,
+            ),
+            'g'    => array(
+                'fill' => true,
+            ),
+        );
     }
 
     public function webfonts_local(){
 
-        //$fontFaces = file_get_contents( get_template_directory().'/assets/css/poppins.min.css' );
-        //$fontFaces = "@font-face{font-family:'Poppins';font-style:italic;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiAyp8kv8JHgFVrJJLmE0tDMPKhSkFEkm8.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiAyp8kv8JHgFVrJJLmE0tMMPKhSkFEkm8.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiAyp8kv8JHgFVrJJLmE0tCMPKhSkFE.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmv1pVFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmv1pVGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmv1pVF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm21lVFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm21lVGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm21lVF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrJJLucXtAOvWDSHFF.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrJJLufntAOvWDSHFF.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrJJLucHtAOvWDSA.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmg1hVFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmg1hVGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmg1hVF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmr19VFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmr19VGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmr19VF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmy15VFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmy15VGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm111VFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm111VGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm111VF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:italic;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm81xVFteOYktMqlap.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:italic;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm81xVGdeOYktMqlap.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:italic;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiDyp8kv8JHgFVrJJLm81xVF9eOYktMqg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrLPTucXtAOvWDSHFF.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrLPTufntAOvWDSHFF.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:100;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiGyp8kv8JHgFVrLPTucHtAOvWDSA.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLFj_Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLFj_Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:200;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLFj_Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDz8Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDz8Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiEyp8kv8JHgFVrJJnecnFHGPezSQ.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLGT9Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLGT9Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLGT9Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLEj6Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLEj6Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLCz7Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLCz7Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDD4Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDD4Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLDD4Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLBT5Z11lFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF6,U+1CF8-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FB}@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLBT5Z1JlFd2JQEl8qw.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(/wp-content/themes/dat/assets/fonts/poppins/pxiByp8kv8JHgFVrLBT5Z1xlFd2JQEk.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}";
         $fontFaces = '';
         $fontFaces =  apply_filters( 'webfonts_local', $fontFaces );
 
@@ -118,7 +149,7 @@ class Theme_Hook
             }';
         }
 
-        wp_add_inline_style( 'theme-layout', $styles );
+        wp_add_inline_style( 'theme-layout', wp_strip_all_tags( $styles ) );
 
         wp_enqueue_style(
             'theme-style',
@@ -143,10 +174,11 @@ class Theme_Hook
             true
         );
 
-        $localize_script = array( 
+        $localize_script = array(
             'ajax_url' => admin_url( 'admin-ajax.php' ),
             'wp_is_mobile'                  => wp_is_mobile() ? true : false,
             'is_user_logged_in'             => is_user_logged_in() ? true : false,
+            'ajax_login_nonce'              => wp_create_nonce( 'dat_ajax_login' ),
         );
 
         $localize_script = apply_filters( '_theme_localize_script', $localize_script );
@@ -172,7 +204,6 @@ class Theme_Hook
         
          add_filter('get_custom_logo', [ $this, 'get_custom_logo' ], 10, 2);
 
-         //add_filter( 'default_wp_template_part_areas', [ $this, 'gutenberg_get_allowed_template_part_areas' ], 10, 1 );
          add_filter('block_type_metadata', [ $this, 'block_type_metadata' ], 10, 1);
 
          add_filter('get_the_archive_title', [ $this, 'get_the_archive_title' ], 10, 3);
@@ -197,7 +228,7 @@ class Theme_Hook
 
     public function _theme_the_title($title) {
         if (! is_admin() && empty($title)) {
-            $title = __('(No title)');
+            $title = __( '(No title)', 'dat' );
         }
 
         return $title;
@@ -228,37 +259,6 @@ class Theme_Hook
             </div>';
         }
         return $html ;
-    }
-
-    function gutenberg_get_allowed_template_part_areas($default_area_definitions)
-    {
-
-        $_area_definitions = array(
-            array(
-                'area'        => WP_TEMPLATE_PART_AREA_SIDEBAR,
-                'label'       => __('Sidebar'),
-                'description' => __(
-                    'Sidebar templates often perform a specific role like displaying post content, and are not tied to any particular area.',
-                    'dat'
-                ),
-                'icon'        => 'layout',
-                'area_tag'    => 'aside',
-            ),
-            array(
-                'area'        => 'navigation',
-                'label'       => __('Navigation'),
-                'description' => __(
-                    'The Navigation template defines a page area that typically contains navigation.',
-                    'dat'
-                ),
-                'icon'        => 'navigation',
-                'area_tag'    => 'section',
-            )
-        );
-
-        $default_area_definitions = array_merge($default_area_definitions, $_area_definitions);
-
-        return $default_area_definitions;
     }
 
     private static function get_file_path_from_theme($file_name)
@@ -352,10 +352,13 @@ class Theme_Hook
     }
 
     public function _theme_ajax_login() {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'];
-        
+
+        check_ajax_referer( 'dat_ajax_login', 'security' );
+
+        $username = sanitize_user( wp_unslash( isset( $_POST['username'] ) ? $_POST['username'] : '' ) );
+        $password = isset( $_POST['password'] ) ? $_POST['password'] : '';
+        $remember = ! empty( $_POST['remember'] );
+
         $creds = array(
             'user_login' => $username,
             'user_password' => $password,
@@ -363,14 +366,13 @@ class Theme_Hook
         );
 
         $secure_cookie   = '';
-            
-        // If the user wants SSL but the session is not SSL, force a secure cookie.
-        if ( ! empty( $_POST['username'] ) && ! force_ssl_admin() ) {
-            $user_name = sanitize_user( wp_unslash( $_POST['username'] ) );
-            $user      = get_user_by( 'login', $user_name );
 
-            if ( ! $user && strpos( $user_name, '@' ) ) {
-                $user = get_user_by( 'email', $user_name );
+        // If the user wants SSL but the session is not SSL, force a secure cookie.
+        if ( ! empty( $username ) && ! force_ssl_admin() ) {
+            $user = get_user_by( 'login', $username );
+
+            if ( ! $user && strpos( $username, '@' ) ) {
+                $user = get_user_by( 'email', $username );
             }
 
             if ( $user ) {
@@ -384,19 +386,11 @@ class Theme_Hook
         $user = wp_signon( $creds, $secure_cookie);
 
         if (is_wp_error($user)) {
-            if (!empty($user->errors)) {
-                foreach( $user->errors as $error_code ){
-                    $err .= $error_code[0];
-                }
-            } else {
-                $err = "invalid credentials username or password.";
-            }
-            echo json_encode(array('message' => $err));
+            $err = __( 'Invalid username or password.', 'dat' );
+            wp_send_json_error( array( 'message' => $err ) );
         } else {
-            echo 'success';
+            wp_send_json_success( array( 'message' => 'success' ) );
         }
-
-        wp_die();
     }
 
     public function _theme_popup_login(){
@@ -404,7 +398,7 @@ class Theme_Hook
         global $theme_options;
 
         $login_modal = is_array($theme_options) && isset($theme_options['login_modal']) ? $theme_options['login_modal'] : false;
-        $signup_text = is_array($theme_options) && isset($theme_options['signup_text']) && !empty($theme_options['signup_text']) ? $theme_options['signup_text'] : __('Sign Up');
+        $signup_text = is_array($theme_options) && isset($theme_options['signup_text']) && !empty($theme_options['signup_text']) ? $theme_options['signup_text'] : __( 'Sign Up', 'dat' );
         $signup_url  = is_array($theme_options) && isset($theme_options['signup_url']) ? $theme_options['signup_url'] : '';
 
         if( $login_modal === false || $login_modal === 'false' ){
@@ -450,7 +444,7 @@ class Theme_Hook
                         <div class="block-modal" style="background-color: rgba(0, 0, 0, 0.3) !important;"><div style="margin: auto;height:250px;width: 100px;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><i class="" style="font-size: 50px;"><svg width="50" height="50" class="icon-loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="currentColor" d="M50.287 32A18.287 18.287 0 1 1 32 13.713a1.5 1.5 0 1 1 0 3A15.287 15.287 0 1 0 47.287 32a1.5 1.5 0 0 1 3 0Z" data-name="Loading"></path></svg></i></div></div></div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                         <div class="login-core">
-                            <h2><?php _e('Login');?></h2>
+                            <h2><?php esc_html_e( 'Login', 'dat' ); ?></h2>
                             <div id="ajax-login-message"></div>
                             <?php
                             do_action('login_enqueue_scripts');
@@ -459,12 +453,12 @@ class Theme_Hook
 
                                 'echo'           => true,
                                 // Default 'redirect' value takes the user back to the request URI.
-                                'redirect'       => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+                                'redirect'       => esc_url_raw( ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ),
                                 'form_id'        => 'loginform',
-                                'label_username' => __( 'Username or email address' ),
-                                'label_password' => __( 'Password' ),
-                                'label_remember' => __( 'Remember Me' ),
-                                'label_log_in'   => __( 'Log In' ),
+                                'label_username' => __( 'Username or email address', 'dat' ),
+                                'label_password' => __( 'Password', 'dat' ),
+                                'label_remember' => __( 'Remember Me', 'dat' ),
+                                'label_log_in'   => __( 'Log In', 'dat' ),
                                 'id_username'    => 'user_login',
                                 'id_password'    => 'user_pass',
                                 'id_remember'    => 'rememberme',
@@ -490,7 +484,7 @@ class Theme_Hook
                                 if ( get_option( 'users_can_register' ) ) {
                                     $login_link_separator = apply_filters( 'login_link_separator', ' | ' );
 
-                                    $registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register' ) );
+                                    $registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register', 'dat' ) );
 
                                     /** This filter is documented in wp-includes/general-template.php */
                                     echo apply_filters( 'register', $registration_url );
@@ -498,7 +492,7 @@ class Theme_Hook
                                     echo esc_html( $login_link_separator );
                                 }
 
-                                $html_link = sprintf( '<a href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?' ) );
+                                $html_link = sprintf( '<a href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?', 'dat' ) );
 
                                 /**
                                  * Filters the link that allows the user to reset the lost password.
@@ -514,7 +508,7 @@ class Theme_Hook
                             <?php
 
                             if ( !empty( $signup_url ) ) {
-                                $signup_url = sprintf( '<div class="signup-wrapper"><a href="%s" class="popup-signup-btn button wp-element-button">%s</a></div>', esc_url( $signup_url ), $signup_text );
+                                $signup_url = sprintf( '<div class="signup-wrapper"><a href="%s" class="popup-signup-btn button wp-element-button">%s</a></div>', esc_url( $signup_url ), esc_html( $signup_text ) );
                                 /** This filter is documented in wp-includes/general-template.php */
                                 echo apply_filters( 'signup', $signup_url );
                             }
@@ -541,7 +535,7 @@ class Theme_Hook
 
         echo '<style type="text/css">';
         if( $login_form_css !== false ){
-            echo $login_form_css;
+            echo wp_strip_all_tags( $login_form_css );
         }
         if( !empty($login_form_logo) ){
             echo 'body #login h1 a {
@@ -559,7 +553,7 @@ class Theme_Hook
             <script type="text/javascript">
                 document.addEventListener('DOMContentLoaded', function() {
                     var loginTitleLink = document.querySelector('#login h1 a');
-                    loginTitleLink.innerHTML = '<img src="<?php echo $login_form_logo;?>" />';
+                    loginTitleLink.innerHTML = '<img src="<?php echo esc_url( $login_form_logo );?>" />';
                     loginTitleLink.href="<?php echo get_site_url(); ?>"; 
                 });
             </script>
