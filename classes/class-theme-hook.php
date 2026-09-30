@@ -155,7 +155,7 @@ class Theme_Hook
             'theme-style',
             get_stylesheet_uri(),
             '',
-            DAT_VERSION
+            wp_get_theme()->get( 'Version' ) // the ACTIVE theme's stylesheet keys to its own version, not the parent's
         );
 
         wp_register_script(

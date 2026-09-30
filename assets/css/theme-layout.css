@@ -660,7 +660,7 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
    .wp-block-navigation__container and only core's default-overlay rules
    out-specify it), submenus flow in place, collapsed until the Navigation
    block's own toggle opens them; menu colors and type stay on the blocks. */
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__container{display:flex;flex-direction:column;align-items:flex-start;width:100%;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__container{display:flex;flex-direction:column;align-items:var(--navigation-layout-justification-setting,flex-start);width:100%;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > .wp-block-navigation__submenu-container{display:none;position:static;width:100%;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > [aria-expanded="true"] + .wp-block-navigation__submenu-container{display:flex;flex-direction:column;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__submenu-icon svg{transition:transform .25s ease;}
