@@ -1,5 +1,9 @@
 *** Dat Theme Changelog ***
 
+= 1.9.6 - 2026/09/30 =
+* This release gives the custom-overlay submenu toggle a comfortable tap target
+* Tweak - The arrow-mode toggle button inside a custom overlay gets a 44px minimum hit area (Apple HIG; WCAG floor is 24px) with the caret centered - the bare svg was a 12px target
+
 = 1.9.5 - 2026/09/30 =
 * This release adds collapsible submenus inside the Navigation block custom overlay - parents collapsed by default, tap the caret to expand, as large menus need on mobile
 * New - theme-scripts toggles the theme own dat-sub-open class on the parent item; the listener is scoped to toggles inside an open custom overlay only and never reads or writes WordPress state, so it cannot touch desktop menus, the default overlay, or third-party menus
