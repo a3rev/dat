@@ -1,5 +1,10 @@
 *** Dat Theme Changelog ***
 
+= 1.9.4 - 2026/09/30 =
+* This release completes the custom-overlay layout: submenus flow BELOW their parent
+* Fix - Navigation items inside a custom overlay stack vertically (core lays nav-item children in a row, so a static submenu sat BESIDE its parent); alignment follows the block's own justification setting
+* Fix - Submenus inside a custom overlay are always expanded and the submenu toggle icons hidden, mirroring core: WordPress pins overlay submenus open and the toggles are inert there. The 1.9.3 collapse-on-toggle rules keyed a state that cannot occur and are removed
+
 = 1.9.3 - 2026/09/30 =
 * This release completes 1.9.2's custom-overlay support and fixes asset cache busting on child-theme sites
 * Fix - The menu list now shows inside the Navigation block's custom overlay: the theme's mobile rules hide every navigation container and only core's default-overlay styles out-specified that, so a custom overlay opened empty (every custom-overlay site was carrying its own child-theme patch for this)
