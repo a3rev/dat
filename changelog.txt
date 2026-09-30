@@ -1,5 +1,10 @@
 *** Dat Theme Changelog ***
 
+= 1.9.2 - 2026/09/30 =
+* This release fixes broken submenus in the Navigation block's mobile overlay and on desktop
+* Fix - Removed the legacy submenu-toggle click handler from theme-scripts. It manually flipped inline display styles on submenu containers, fighting the Navigation block's own Interactivity API toggles: the first tap hid the submenu core had just opened, and clicking a desktop submenu arrow left an inline display:none that kept that dropdown hidden until reload. The block handles submenu toggling natively.
+* Tweak - theme-scripts is now enqueued with the theme version for correct cache busting when the theme updates
+
 = 1.9.1 - 2026/07/02 =
 * Security hardening for login handling and settings output escaping
 * Tweak - Hardened the popup login AJAX handler with request verification and generic error messaging
