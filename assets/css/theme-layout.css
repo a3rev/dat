@@ -655,15 +655,20 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 #scrollTopButton:hover{background-color:#666;}
 
 /* Custom navigation overlay (WP overlay template part -> .disable-default-overlay):
-   core delegates ALL presentation inside a custom overlay to the theme, and pins
-   overlay submenus open (the toggles are inert there), so the theme mirrors
-   core's own default-overlay treatment: the menu list shows (the mobile block
-   above hides every .wp-block-navigation__container and only core's
-   default-overlay rules out-specify it), items stack so each submenu flows
-   BELOW its parent, submenus are unboxed and expanded, and the inert submenu
-   icons are hidden exactly as core hides them in its default overlay. Menu
-   colors and type stay on the blocks. */
+   core delegates ALL presentation inside a custom overlay to the theme, and on
+   current WordPress pins overlay submenus open (aria-expanded is forced true and
+   the toggles are inert). The theme therefore provides collapse itself: submenus
+   are collapsed by default and theme-scripts toggles the theme's OWN dat-sub-open
+   class on the parent item - core state is never read or written. Label and caret
+   share a row; the submenu wraps below the parent full-width. Menu colors and
+   type stay on the blocks.
+   SUNSET: when Gutenberg #82596 (custom-overlay toggles become functional)
+   reaches a WordPress release, delete the theme-scripts listener and re-key
+   these rules on aria-expanded - the 1.9.3 rules, in git history. */
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__container{display:flex;flex-direction:column;align-items:var(--navigation-layout-justification-setting,flex-start);width:100%;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation-item{display:flex;flex-direction:column;align-items:var(--navigation-layout-justification-setting,flex-start);}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > .wp-block-navigation__submenu-container{display:flex;flex-direction:column;position:static;width:100%;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__submenu-icon.wp-block-navigation__submenu-icon.wp-block-navigation__submenu-icon{display:none;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation-item{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;width:100%;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > .wp-block-navigation__submenu-container{display:none;flex-direction:column;position:static;width:100%;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child.dat-sub-open > .wp-block-navigation__submenu-container{display:flex;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__submenu-icon svg{transition:transform .25s ease;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .has-child:not(.dat-sub-open) > .wp-block-navigation__submenu-icon svg{transform:rotate(0deg);}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .dat-sub-open > .wp-block-navigation__submenu-icon svg{transform:rotate(180deg);}

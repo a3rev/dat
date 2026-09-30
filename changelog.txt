@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.9.5 - 2026/09/30 =
+* This release adds collapsible submenus inside the Navigation block custom overlay - parents collapsed by default, tap the caret to expand, as large menus need on mobile
+* New - theme-scripts toggles the theme own dat-sub-open class on the parent item; the listener is scoped to toggles inside an open custom overlay only and never reads or writes WordPress state, so it cannot touch desktop menus, the default overlay, or third-party menus
+* New - Overlay submenus are collapsed by default and expand under dat-sub-open; label and caret share a row, the submenu wraps below the parent full-width; the caret shows again, points down when closed (core rotates it on aria-expanded, which WordPress pins true in overlays, so the closed state is explicitly zeroed) and up when open
+* Dev note - When Gutenberg #82596 (custom-overlay toggles become functional) reaches a WordPress release, remove the listener and re-key the overlay CSS on aria-expanded
+
 = 1.9.4 - 2026/09/30 =
 * This release completes the custom-overlay layout: submenus flow BELOW their parent
 * Fix - Navigation items inside a custom overlay stack vertically (core lays nav-item children in a row, so a static submenu sat BESIDE its parent); alignment follows the block's own justification setting

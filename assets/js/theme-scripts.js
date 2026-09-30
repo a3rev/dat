@@ -101,3 +101,27 @@ window.addEventListener('load', function() {
         }
     }
 });
+
+/* Collapse-in-overlay: current WordPress pins custom-overlay submenus open
+   (aria-expanded forced true, toggles inert), so the theme provides collapse
+   with its OWN state class. It never reads or writes core's state, and is
+   scoped so it cannot touch desktop menus or the default overlay.
+   SUNSET: when Gutenberg #82596 reaches a WordPress release (custom-overlay
+   toggles become functional), delete this listener and re-key the overlay
+   submenu CSS on aria-expanded (the 1.9.3 rules, in git history). */
+document.addEventListener('click', function (e) {
+    var toggle = e.target.closest('.wp-block-navigation-submenu__toggle');
+    if (!toggle) {
+        return;
+    }
+    if (!toggle.closest('.wp-block-navigation__responsive-container.disable-default-overlay .wp-block-navigation__overlay-container')) {
+        return;
+    }
+    var item = toggle.closest('.wp-block-navigation-item');
+    if (!item) {
+        return;
+    }
+    var open = item.classList.toggle('dat-sub-open');
+    // Best effort only - the Interactivity API may rewrite it on its own renders.
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
