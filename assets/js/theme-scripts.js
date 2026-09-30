@@ -21,34 +21,6 @@ window.addEventListener('load', function() {
     }
 });
 
-window.addEventListener('click', function(e) {
-    if (e.target.matches('.wp-block-navigation-submenu__toggle')) {
-        var parentItem = e.target.parentElement;
-        var submenuContainer = e.target.nextElementSibling;
-        submenuContainer.style.display = submenuContainer.style.display === 'none' ? 'block' : 'none';
-        if (e.target.classList.contains('open-sub')) {
-            e.target.classList.remove('open-sub');
-            parentItem.classList.remove('current-open');
-        } else {
-            e.target.classList.add('open-sub');
-            parentItem.classList.add('current-open');
-        }
-    }
-    if (e.target.matches('.wp-block-navigation-submenu__toggle svg')) {
-        var toggle = e.target.parentElement;
-        var parentItem = toggle.parentElement;
-        var submenu = toggle.nextElementSibling;
-        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-        if (toggle.classList.contains('open-sub')) {
-          toggle.classList.remove('open-sub');
-          parentItem.classList.remove('current-open');
-        } else {
-          toggle.classList.add('open-sub');
-          parentItem.classList.add('current-open');
-        }
-    }
-});
-
 document.addEventListener('click', function(event) {
     if (event.target.matches('.plus, .minus')) {
 

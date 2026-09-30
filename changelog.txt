@@ -1,5 +1,12 @@
 *** Dat Theme Changelog ***
 
+= 1.9.2 - 2026/09/30 =
+* This release fixes broken submenus in the Navigation block's mobile overlay and on desktop
+* Fix - Removed the legacy submenu-toggle click handler from theme-scripts. It manually flipped inline display styles on submenu containers, fighting the Navigation block's own Interactivity API toggles: the first tap hid the submenu core had just opened, and clicking a desktop submenu arrow left an inline display:none that kept that dropdown hidden until reload. The block handles submenu toggling natively.
+* Fix - Removed the mobile display:none on submenu containers in the site-header-3 drawer that only the deleted handler could undo; drawer submenus now show expanded, WordPress's native overlay behaviour
+* New - Structural support for the Navigation block's custom overlay (overlay template part): submenus flow in place, collapsed until the block's own toggle opens them, with the toggle arrow rotating on open. Menu colors and typography stay on the blocks
+* Tweak - theme-scripts is now enqueued with the theme version for correct cache busting when the theme updates
+
 = 1.9.1 - 2026/07/02 =
 * Security hardening for login handling and settings output escaping
 * Tweak - Hardened the popup login AJAX handler with request verification and generic error messaging

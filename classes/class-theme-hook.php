@@ -162,7 +162,7 @@ class Theme_Hook
             'theme-scripts',
             get_theme_file_uri( 'assets/js/theme-scripts'.$suffix.'.js' ),
             array(),
-            true
+            DAT_VERSION
         );
 
         wp_enqueue_script( 'theme-scripts' );
