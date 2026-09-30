@@ -655,9 +655,12 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 #scrollTopButton:hover{background-color:#666;}
 
 /* Custom navigation overlay (WP overlay template part -> .disable-default-overlay):
-   core delegates submenu presentation inside a custom overlay to the theme.
-   Structural only - submenus flow in place, collapsed until the Navigation
+   core delegates ALL presentation inside a custom overlay to the theme.
+   Structural only - the menu list shows (the mobile block above hides every
+   .wp-block-navigation__container and only core's default-overlay rules
+   out-specify it), submenus flow in place, collapsed until the Navigation
    block's own toggle opens them; menu colors and type stay on the blocks. */
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__container{display:flex;flex-direction:column;align-items:flex-start;width:100%;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > .wp-block-navigation__submenu-container{display:none;position:static;width:100%;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > [aria-expanded="true"] + .wp-block-navigation__submenu-container{display:flex;flex-direction:column;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__submenu-icon svg{transition:transform .25s ease;}
