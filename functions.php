@@ -8,7 +8,7 @@
  * The theme version.
  */
 
-define('DAT_VERSION', wp_get_theme()->get('Version'));
+define('DAT_VERSION', wp_get_theme( get_template() )->get('Version'));
 
 // Theme settings.
 require_once 'classes/class-theme-settings.php';

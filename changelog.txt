@@ -1,5 +1,10 @@
 *** Dat Theme Changelog ***
 
+= 1.9.3 - 2026/09/30 =
+* This release completes 1.9.2's custom-overlay support and fixes asset cache busting on child-theme sites
+* Fix - The menu list now shows inside the Navigation block's custom overlay: the theme's mobile rules hide every navigation container and only core's default-overlay styles out-specified that, so a custom overlay opened empty (every custom-overlay site was carrying its own child-theme patch for this)
+* Fix - DAT_VERSION now reads the parent theme's version. It previously read the ACTIVE theme, so on every child-theme site all parent assets were served as ?ver=<child version> — a URL that never changes across theme updates while the files ship with a one-year immutable cache lifetime, leaving returning visitors on stale CSS/JS after every update. The active theme's own style.css keeps its own version, so a child stylesheet still cache-busts on a child version bump
+
 = 1.9.2 - 2026/09/30 =
 * This release fixes broken submenus in the Navigation block's mobile overlay and on desktop
 * Fix - Removed the legacy submenu-toggle click handler from theme-scripts. It manually flipped inline display styles on submenu containers, fighting the Navigation block's own Interactivity API toggles: the first tap hid the submenu core had just opened, and clicking a desktop submenu arrow left an inline display:none that kept that dropdown hidden until reload. The block handles submenu toggling natively.
