@@ -130,3 +130,29 @@ document.addEventListener('click', function (e) {
     // Best effort only - the Interactivity API may rewrite it on its own renders.
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
+
+/* Keyboard focus in an open mobile menu: WordPress points the menu's focus-trap
+   ends at a submenu's links when it opens, and the collapse above hides those
+   links again - so focus could leave the menu dialog. The theme cycles Tab /
+   Shift+Tab through the controls visible at that moment instead. Same SUNSET
+   as the listener above. */
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') {
+        return;
+    }
+    var box = e.target.closest && e.target.closest('.wp-block-navigation__responsive-container.is-menu-open');
+    if (!box) {
+        return;
+    }
+    var items = Array.prototype.filter.call(box.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (el) {
+        return !el.disabled && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden';
+    });
+    if (!items.length) {
+        return;
+    }
+    var i = items.indexOf(e.target);
+    var next = i < 0 ? items[e.shiftKey ? items.length - 1 : 0] : items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length];
+    e.preventDefault();
+    e.stopPropagation(); // capture phase: WordPress's own trap, keyed on hidden links, never sees it
+    next.focus();
+}, true);
