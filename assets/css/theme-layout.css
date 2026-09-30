@@ -562,7 +562,7 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child .submenu-container,
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child .wp-block-navigation__submenu-container{padding:0 0px;width:100%;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container .wp-block-navigation__submenu-icon{margin:0;}
-	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon{display:block;position:absolute;right:0px;top:0px;font-size:28px;height:50px;width:50px;border-left:1px solid rgba(0,0,0,0.105);}
+	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon{display:block;position:absolute;right:0px;top:0px;font-size:28px;height:50px;width:50px;border-left:1px solid rgba(0,0,0,0.105);z-index:2;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon.open-sub{top:0px;border-right:1px solid rgba(0,0,0,0.105);}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation__submenu-icon{top:0;right:0;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation__submenu-icon.open-sub{top:0;}
@@ -662,7 +662,7 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
    state is never read or written. Menu colors and type stay on the blocks.
    SUNSET: when Gutenberg #82596 (functional overlay toggles) reaches a WordPress release, delete the
    theme-scripts listener and re-key the collapse on aria-expanded (the 1.9.3 rules, in git history). */
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child > .wp-block-navigation__submenu-container{display:none;}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child > .wp-block-navigation-submenu__toggle ~ .wp-block-navigation__submenu-container{display:none;}
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child.dat-sub-open > .wp-block-navigation__submenu-container{display:flex;flex-direction:column;width:100%;}
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item.has-child{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:var(--navigation-layout-justification-setting,flex-start);}
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child > .wp-block-navigation__submenu-icon{display:inline-flex;align-items:center;}

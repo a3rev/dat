@@ -145,7 +145,7 @@ document.addEventListener('keydown', function (e) {
         return;
     }
     var items = Array.prototype.filter.call(box.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (el) {
-        return !el.disabled && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden';
+        return !el.disabled && el.tabIndex >= 0 && el.getAttribute('aria-hidden') !== 'true' && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden';
     });
     if (!items.length) {
         return;
