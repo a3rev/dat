@@ -562,7 +562,7 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child .submenu-container,
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child .wp-block-navigation__submenu-container{padding:0 0px;width:100%;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container .wp-block-navigation__submenu-icon{margin:0;}
-	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon{display:block;position:absolute;right:0px;top:0px;font-size:28px;height:50px;width:50px;border-left:1px solid rgba(0,0,0,0.105);}
+	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon{display:block;position:absolute;right:0px;top:0px;font-size:28px;height:50px;width:50px;border-left:1px solid rgba(0,0,0,0.105);z-index:2;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon.open-sub{top:0px;border-right:1px solid rgba(0,0,0,0.105);}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation__submenu-icon{top:0;right:0;}
 	.site-header-3 .site-navigation .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation__submenu-icon.open-sub{top:0;}
@@ -654,23 +654,28 @@ div#login-modal #wfls-prompt-overlay{padding:0!important;background-color:#fff!i
 #scrollTopButton svg{fill:white;}
 #scrollTopButton:hover{background-color:#666;}
 
-/* Custom navigation overlay (WP overlay template part -> .disable-default-overlay):
-   core delegates ALL presentation inside a custom overlay to the theme, and on
-   current WordPress pins overlay submenus open (aria-expanded is forced true and
-   the toggles are inert). The theme therefore provides collapse itself: submenus
-   are collapsed by default and theme-scripts toggles the theme's OWN dat-sub-open
-   class on the parent item - core state is never read or written. Label and caret
-   share a row; the submenu wraps below the parent full-width. Menu colors and
-   type stay on the blocks.
-   SUNSET: when Gutenberg #82596 (custom-overlay toggles become functional)
-   reaches a WordPress release, delete the theme-scripts listener and re-key
-   these rules on aria-expanded - the 1.9.3 rules, in git history. */
+/* Mobile menus - the Navigation block overlay, whether WordPress's default one (as in DAT's own header)
+   or a custom overlay template part (.disable-default-overlay). Current WordPress pins overlay submenus
+   open (aria-expanded forced true, toggles inert), so the theme provides collapse itself: submenus start
+   collapsed and theme-scripts toggles the theme's OWN classes on the parent (dat-sub-open, plus DAT's
+   drawer classes open-sub / current-open, which the default header's drawer rules above style) - core
+   state is never read or written. Menu colors and type stay on the blocks.
+   SUNSET: when Gutenberg #82596 (functional overlay toggles) reaches a WordPress release, delete the
+   theme-scripts listener and re-key the collapse on aria-expanded (the 1.9.3 rules, in git history). */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child > .wp-block-navigation-submenu__toggle ~ .wp-block-navigation__submenu-container{display:none;}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child.dat-sub-open > .wp-block-navigation__submenu-container{display:flex;flex-direction:column;width:100%;}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item.has-child{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:var(--navigation-layout-justification-setting,flex-start);}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child > .wp-block-navigation__submenu-icon{display:inline-flex;align-items:center;}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon.wp-block-navigation-submenu__toggle{justify-content:center;min-width:44px;min-height:44px;}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon svg{transition:transform .25s ease;}
+/* not !important: DAT's own header drawer keeps its designed caret rotation (open-sub, above) */
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child:not(.dat-sub-open) > .wp-block-navigation__submenu-icon > svg{transform:rotate(0deg);}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .has-child.dat-sub-open > .wp-block-navigation__submenu-icon > svg{transform:rotate(180deg);}
+/* custom overlays only - core provides none of their structure: show the list, lay items out, unbox
+   submenus, and keep DAT's default-header drawer caret styling out of the overlay part */
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__container{display:flex;flex-direction:column;align-items:var(--navigation-layout-justification-setting,flex-start);width:100%;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation-item{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:var(--navigation-layout-justification-setting,flex-start);width:100%;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child > .wp-block-navigation__submenu-container{display:none;flex-direction:column;position:static;width:100%;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .has-child.dat-sub-open > .wp-block-navigation__submenu-container{display:flex;}
+.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .has-child > .wp-block-navigation__submenu-container{position:static;min-width:0;height:auto;opacity:1;visibility:visible;overflow:initial;border:none;box-shadow:none;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__submenu-icon.wp-block-navigation__submenu-icon.wp-block-navigation__submenu-icon{display:inline-flex;align-items:center;position:static;width:auto;height:auto;border:0;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__submenu-icon.wp-block-navigation-submenu__toggle{justify-content:center;min-width:44px;min-height:44px;}
-.wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .wp-block-navigation__submenu-icon svg{transition:transform .25s ease;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .has-child:not(.dat-sub-open) > .wp-block-navigation__submenu-icon svg{transform:rotate(0deg)!important;}
 .wp-block-navigation__responsive-container.disable-default-overlay.is-menu-open .wp-block-navigation__overlay-container .dat-sub-open > .wp-block-navigation__submenu-icon svg{transform:rotate(180deg)!important;}

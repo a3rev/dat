@@ -102,19 +102,22 @@ window.addEventListener('load', function() {
     }
 });
 
-/* Collapse-in-overlay: current WordPress pins custom-overlay submenus open
-   (aria-expanded forced true, toggles inert), so the theme provides collapse
-   with its OWN state class. It never reads or writes core's state, and is
-   scoped so it cannot touch desktop menus or the default overlay.
-   SUNSET: when Gutenberg #82596 reaches a WordPress release (custom-overlay
-   toggles become functional), delete this listener and re-key the overlay
-   submenu CSS on aria-expanded (the 1.9.3 rules, in git history). */
+/* Collapse in mobile menus: current WordPress pins overlay submenus open
+   (aria-expanded forced true, toggles inert) - in its default overlay, as in
+   DAT's own header, and in custom overlays - so the theme provides collapse
+   with its OWN classes: dat-sub-open, plus DAT's drawer classes open-sub /
+   current-open that the default header's drawer styles key on. It never reads
+   or writes core's state and only acts inside an open overlay, so desktop
+   menus are untouched.
+   SUNSET: when Gutenberg #82596 reaches a WordPress release (overlay toggles
+   become functional), delete this listener and re-key the overlay submenu CSS
+   on aria-expanded (the 1.9.3 rules, in git history). */
 document.addEventListener('click', function (e) {
     var toggle = e.target.closest('.wp-block-navigation-submenu__toggle');
     if (!toggle) {
         return;
     }
-    if (!toggle.closest('.wp-block-navigation__responsive-container.disable-default-overlay .wp-block-navigation__overlay-container')) {
+    if (!toggle.closest('.wp-block-navigation__responsive-container.is-menu-open')) {
         return;
     }
     var item = toggle.closest('.wp-block-navigation-item');
@@ -122,6 +125,34 @@ document.addEventListener('click', function (e) {
         return;
     }
     var open = item.classList.toggle('dat-sub-open');
+    item.classList.toggle('current-open', open);
+    toggle.classList.toggle('open-sub', open);
     // Best effort only - the Interactivity API may rewrite it on its own renders.
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
+
+/* Keyboard focus in an open mobile menu: WordPress points the menu's focus-trap
+   ends at a submenu's links when it opens, and the collapse above hides those
+   links again - so focus could leave the menu dialog. The theme cycles Tab /
+   Shift+Tab through the controls visible at that moment instead. Same SUNSET
+   as the listener above. */
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') {
+        return;
+    }
+    var box = e.target.closest && e.target.closest('.wp-block-navigation__responsive-container.is-menu-open');
+    if (!box) {
+        return;
+    }
+    var items = Array.prototype.filter.call(box.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (el) {
+        return !el.disabled && el.tabIndex >= 0 && el.getAttribute('aria-hidden') !== 'true' && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden';
+    });
+    if (!items.length) {
+        return;
+    }
+    var i = items.indexOf(e.target);
+    var next = i < 0 ? items[e.shiftKey ? items.length - 1 : 0] : items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length];
+    e.preventDefault();
+    e.stopPropagation(); // capture phase: WordPress's own trap, keyed on hidden links, never sees it
+    next.focus();
+}, true);

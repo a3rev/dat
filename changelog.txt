@@ -1,5 +1,11 @@
 *** Dat Theme Changelog ***
 
+= 1.9.7 - 2026/10/01 =
+* This release makes submenus collapsible in every DAT mobile menu, including DAT's own header
+* New - Submenus start collapsed in WordPress's standard mobile menu too (DAT's default header, and any Navigation block using the default overlay), not only in custom overlays; tap the caret to expand below the parent, tap again to collapse
+* Fix - The caret in DAT's default header drawer works again: WordPress keeps every submenu open there and the caret did nothing. The theme now sets its own drawer classes (open-sub, current-open), so the caret rotates and the open row highlights as the drawer was designed
+* Dev note - SUNSET unchanged: when Gutenberg #82596 reaches a WordPress release, remove the theme-scripts listener and re-key the collapse on aria-expanded
+
 = 1.9.6 - 2026/09/30 =
 * This release gives the custom-overlay submenu toggle a comfortable tap target
 * Tweak - The arrow-mode toggle button inside a custom overlay gets a 44px minimum hit area (Apple HIG; WCAG floor is 24px) with the caret centered - the bare svg was a 12px target
